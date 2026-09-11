@@ -663,20 +663,21 @@ Get a Storage Quote
 </footer>
 <!-- END: MainFooter -->
 
+
 <!-- BEGIN: Shared Quote Calculator Modal -->
 <div id="quoteCalculatorModal"
-     class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/75 backdrop-blur-sm p-3 sm:p-5"
+     class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/75 backdrop-blur-sm p-2 sm:p-4"
      aria-hidden="true">
 
-  <div class="relative w-full max-w-3xl max-h-[94vh] overflow-y-auto rounded-2xl sm:rounded-3xl bg-white shadow-2xl">
+  <div class="relative w-full max-w-6xl max-h-[96vh] overflow-y-auto rounded-2xl sm:rounded-3xl bg-white shadow-2xl">
 
-    <!-- Modal header -->
-    <div class="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-slate-200 px-5 sm:px-7 py-4 sm:py-5 rounded-t-2xl sm:rounded-t-3xl">
+    <!-- Modal Header -->
+    <div class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200 px-4 sm:px-6 py-4 rounded-t-2xl sm:rounded-t-3xl">
       <div class="flex items-start justify-between gap-4">
         <div>
           <p class="text-[11px] font-extrabold uppercase tracking-[0.16em] text-brand-teal mb-1">Valet quote calculator</p>
           <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Get your quote</h2>
-          <p class="text-xs sm:text-sm text-slate-500 mt-1">Choose storage or removals, fill in your details, then continue on WhatsApp.</p>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1">Choose storage or removals and complete your quote.</p>
         </div>
 
         <button type="button"
@@ -690,7 +691,7 @@ Get a Storage Quote
       </div>
 
       <!-- Service switch -->
-      <div class="grid grid-cols-2 gap-2 mt-5 p-1.5 rounded-xl bg-slate-100">
+      <div class="grid grid-cols-2 gap-2 mt-4 p-1.5 rounded-xl bg-slate-100">
         <button id="quoteTabStorage"
                 type="button"
                 onclick="switchQuotePanel('storage')"
@@ -707,179 +708,571 @@ Get a Storage Quote
       </div>
     </div>
 
-    <div class="p-5 sm:p-7">
+    <div class="p-4 sm:p-6">
 
-      <!-- STORAGE PANEL -->
+      <!-- STORAGE PANEL - kept simple for now -->
       <section id="quotePanelStorage">
-        <div class="mb-6">
-          <h3 class="text-lg sm:text-xl font-extrabold text-slate-900">Valet Storage Quote</h3>
-          <p class="text-xs sm:text-sm text-slate-500 mt-1">Tell us what you need stored and for how long.</p>
+        <div class="max-w-3xl mx-auto">
+          <div class="mb-6">
+            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900">Valet Storage Quote</h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Tell us what you need stored and for how long.</p>
+          </div>
+
+          <form id="storageQuoteForm" class="space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-2">Name</label>
+                <input required name="name" type="text" placeholder="Your name"
+                       class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-2">Phone</label>
+                <input required name="phone" type="tel" placeholder="Your phone number"
+                       class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-2">Email <span class="font-normal text-slate-400">(optional)</span></label>
+              <input name="email" type="email" placeholder="you@example.com"
+                     class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-2">Collection postcode / area</label>
+              <input required name="postcode" type="text" placeholder="e.g. SW18"
+                     class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-2">How many Valet Boxes?</label>
+                <input required name="boxes" type="number" min="1" max="100" value="5"
+                       class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-2">How long do you need storage?</label>
+                <select required name="duration"
+                        class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
+                  <option value="">Select duration</option>
+                  <option>1 month</option>
+                  <option>2–3 months</option>
+                  <option>4–6 months</option>
+                  <option>7–12 months</option>
+                  <option>12+ months</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-2">Preferred collection date</label>
+              <input required name="collection_date" type="date"
+                     class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-2">Anything else we should know? <span class="font-normal text-slate-400">(optional)</span></label>
+              <textarea name="notes" rows="3" placeholder="Access details, extra items, questions..."
+                        class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal"></textarea>
+            </div>
+
+            <button type="submit"
+                    class="w-full bg-brand-teal hover:bg-brand-tealHover text-white py-3.5 rounded-lg font-bold text-sm transition-all shadow-sm">
+              Review Storage Quote
+            </button>
+          </form>
         </div>
-
-        <form id="storageQuoteForm" class="space-y-5">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-2">Name</label>
-              <input required name="name" type="text" placeholder="Your name"
-                     class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-2">Phone</label>
-              <input required name="phone" type="tel" placeholder="Your phone number"
-                     class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-2">Email <span class="font-normal text-slate-400">(optional)</span></label>
-            <input name="email" type="email" placeholder="you@example.com"
-                   class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-2">Collection postcode / area</label>
-            <input required name="postcode" type="text" placeholder="e.g. SW18"
-                   class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-2">How many Valet Boxes?</label>
-              <input required name="boxes" type="number" min="1" max="100" value="5"
-                     class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-2">How long do you need storage?</label>
-              <select required name="duration"
-                      class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
-                <option value="">Select duration</option>
-                <option>1 month</option>
-                <option>2–3 months</option>
-                <option>4–6 months</option>
-                <option>7–12 months</option>
-                <option>12+ months</option>
-                <option>Not sure yet</option>
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-2">Preferred collection date</label>
-            <input required name="collection_date" type="date"
-                   class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-2">Anything else we should know? <span class="font-normal text-slate-400">(optional)</span></label>
-            <textarea name="notes" rows="3" placeholder="Access details, extra items, questions..."
-                      class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal"></textarea>
-          </div>
-
-          <button type="submit"
-                  class="w-full bg-brand-teal hover:bg-brand-tealHover text-white py-3.5 rounded-lg font-bold text-sm transition-all shadow-sm">
-            Continue with Storage Quote
-          </button>
-        </form>
       </section>
 
       <!-- REMOVALS PANEL -->
       <section id="quotePanelRemovals" class="hidden">
-        <div class="mb-6">
-          <h3 class="text-lg sm:text-xl font-extrabold text-slate-900">Valet Removals Quote</h3>
-          <p class="text-xs sm:text-sm text-slate-500 mt-1">Tell us about your move and we'll prepare the details for discussion.</p>
+
+        <!-- Removals stepper -->
+        <div class="mb-7 overflow-x-auto">
+          <div class="min-w-[700px] grid grid-cols-5 gap-3 items-start">
+            <div class="flex items-center gap-2">
+              <span id="remStepDot1" class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold"></span>
+              <div>
+                <div class="text-xs font-bold text-slate-800">Quote Method</div>
+                <div class="text-[10px] text-slate-400">Online quote</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span id="remStepDot2" class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold">2</span>
+              <div>
+                <div class="text-xs font-bold text-slate-800">Move Details</div>
+                <div class="text-[10px] text-slate-400">About your move</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span id="remStepDot3" class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold">3</span>
+              <div>
+                <div class="text-xs font-bold text-slate-800">Inventory</div>
+                <div class="text-[10px] text-slate-400">Items &amp; extras</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span id="remStepDot4" class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold">4</span>
+              <div>
+                <div class="text-xs font-bold text-slate-800">Review</div>
+                <div class="text-[10px] text-slate-400">Check your quote</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span id="remStepDot5" class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold">5</span>
+              <div>
+                <div class="text-xs font-bold text-slate-800">Book</div>
+                <div class="text-[10px] text-slate-400">Confirm &amp; submit</div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <form id="removalsQuoteForm" class="space-y-5">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-2">Name</label>
-              <input required name="name" type="text" placeholder="Your name"
-                     class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+        <!-- STEP 2: MOVE DETAILS -->
+        <div id="removalsStep2">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-8">
+              <div class="mb-5">
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Tell us about your move.</h3>
+                <p class="text-sm text-slate-500 mt-1">The more details you share, the more accurate your quote can be.</p>
+              </div>
+
+              <form id="removalsMoveDetailsForm" class="space-y-5">
+
+                <div class="rounded-2xl border border-slate-200 p-5 bg-white">
+                  <h4 class="font-extrabold text-slate-900 mb-4">Move details</h4>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="block text-xs font-bold text-slate-700 mb-2">Move from</label>
+                      <input required name="moving_from" type="text" placeholder="Collection address or postcode"
+                             class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+                    </div>
+
+                    <div>
+                      <label class="block text-xs font-bold text-slate-700 mb-2">Move to</label>
+                      <input required name="moving_to" type="text" placeholder="Delivery address or postcode"
+                             class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+                    </div>
+
+                    <div>
+                      <label class="block text-xs font-bold text-slate-700 mb-2">Property type (from)</label>
+                      <select required name="property_from"
+                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+                        <option value="">Select</option>
+                        <option>House</option>
+                        <option>Apartment</option>
+                        <option>Office / Commercial</option>
+                        <option>Storage Unit</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label class="block text-xs font-bold text-slate-700 mb-2">Property type (to)</label>
+                      <select required name="property_to"
+                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+                        <option value="">Select</option>
+                        <option>House</option>
+                        <option>Apartment</option>
+                        <option>Office / Commercial</option>
+                        <option>Storage Unit</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label class="block text-xs font-bold text-slate-700 mb-2">Number of bedrooms</label>
+                      <select required name="bedrooms"
+                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+                        <option value="">Select</option>
+                        <option>Studio</option>
+                        <option>1 Bedroom</option>
+                        <option>2 Bedrooms</option>
+                        <option>3 Bedrooms</option>
+                        <option>4 Bedrooms</option>
+                        <option>5+ Bedrooms</option>
+                        <option>Office / Commercial</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label class="block text-xs font-bold text-slate-700 mb-2">Stairs / lift access</label>
+                      <select required name="access"
+                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+                        <option value="">Select</option>
+                        <option>Ground floor / direct access</option>
+                        <option>Lift available</option>
+                        <option>1 flight of stairs</option>
+                        <option>2 flights of stairs</option>
+                        <option>3+ flights of stairs</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label class="block text-xs font-bold text-slate-700 mb-2">Preferred move date</label>
+                      <input required name="moving_date" type="date"
+                             class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+                    </div>
+
+                    <div>
+                      <label class="block text-xs font-bold text-slate-700 mb-2">Preferred time</label>
+                      <select required name="preferred_time"
+                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+                        <option value="">Select</option>
+                        <option>Morning (8am–12pm)</option>
+                        <option>Afternoon (12pm–5pm)</option>
+                        <option>Evening (5pm–8pm)</option>
+                        <option>Flexible</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                    <div>
+                      <label class="block text-xs font-bold text-slate-700 mb-2">Packing service needed?</label>
+                      <select required name="packing"
+                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+                        <option value="">Select</option>
+                        <option>Yes – full packing service</option>
+                        <option>Yes – some packing help</option>
+                        <option>No</option>
+                        <option>Not sure yet</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label class="block text-xs font-bold text-slate-700 mb-2">Disassembly / reassembly help?</label>
+                      <select required name="disassembly"
+                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+                        <option value="">Select</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                        <option>Not sure yet</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="mt-4">
+                    <label class="block text-xs font-bold text-slate-700 mb-2">Parking / access notes <span class="font-normal text-slate-400">(optional)</span></label>
+                    <textarea name="access_notes" rows="3" maxlength="250" placeholder="Parking, loading access, stairs, lifts, restrictions..."
+                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange"></textarea>
+                  </div>
+                </div>
+
+                <div class="rounded-2xl border border-slate-200 p-5 bg-white">
+                  <h4 class="font-extrabold text-slate-900 mb-4">Contact details</h4>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="block text-xs font-bold text-slate-700 mb-2">Full name</label>
+                      <input required name="name" type="text"
+                             class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+                    </div>
+
+                    <div>
+                      <label class="block text-xs font-bold text-slate-700 mb-2">Email address</label>
+                      <input required name="email" type="email"
+                             class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+                    </div>
+
+                    <div>
+                      <label class="block text-xs font-bold text-slate-700 mb-2">Phone number</label>
+                      <input required name="phone" type="tel"
+                             class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+                    </div>
+
+                    <div>
+                      <label class="block text-xs font-bold text-slate-700 mb-2">Best time to contact</label>
+                      <select name="best_contact_time"
+                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+                        <option>Morning (8am–12pm)</option>
+                        <option>Afternoon (12pm–5pm)</option>
+                        <option>Evening (5pm–8pm)</option>
+                        <option>Any time</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <button type="submit"
+                        class="w-full bg-brand-teal hover:bg-brand-tealHover text-white py-3.5 rounded-lg font-bold text-sm transition-all shadow-sm">
+                  Continue to inventory →
+                </button>
+              </form>
             </div>
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-2">Phone</label>
-              <input required name="phone" type="tel" placeholder="Your phone number"
-                     class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+
+            <aside class="lg:col-span-4">
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 lg:sticky lg:top-32">
+                <p class="text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-teal">Your removals quote</p>
+                <h4 class="text-xl font-extrabold text-slate-900 mt-2">Move details first</h4>
+                <p class="text-sm text-slate-500 mt-2">Complete your move information, then add inventory and extras.</p>
+
+                <div class="mt-5 space-y-3 text-sm">
+                  <div class="flex gap-3">
+                    <span class="w-6 h-6 rounded-full bg-brand-teal text-white flex items-center justify-center text-xs font-bold">1</span>
+                    <span>Move details</span>
+                  </div>
+                  <div class="flex gap-3">
+                    <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold">2</span>
+                    <span>Inventory &amp; extras</span>
+                  </div>
+                  <div class="flex gap-3">
+                    <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold">3</span>
+                    <span>Review</span>
+                  </div>
+                  <div class="flex gap-3">
+                    <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold">4</span>
+                    <span>Book / WhatsApp handoff</span>
+                  </div>
+                </div>
+
+                <button type="button"
+                        onclick="openWhatsAppQuote('removals')"
+                        class="w-full mt-6 border border-brand-whatsapp text-brand-whatsapp hover:bg-green-50 py-3 rounded-lg font-bold text-sm">
+                  Quote on WhatsApp
+                </button>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <!-- STEP 3: INVENTORY -->
+        <div id="removalsStep3" class="hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-8">
+              <div class="mb-5">
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Add your items and choose extras.</h3>
+                <p class="text-sm text-slate-500 mt-1">Build a more accurate removals quote and customise your move.</p>
+              </div>
+
+              <div class="rounded-2xl border border-slate-200 p-5">
+                <div class="flex items-center justify-between gap-3 mb-4">
+                  <div>
+                    <h4 class="font-extrabold text-slate-900">Inventory: Add your items</h4>
+                    <p class="text-xs text-slate-500 mt-1">Use + and – to set quantities.</p>
+                  </div>
+                  <button type="button" onclick="clearInventory()" class="text-xs font-bold text-slate-500 hover:text-brand-teal">Clear all</button>
+                </div>
+
+                <div id="inventoryGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3"></div>
+              </div>
+
+              <div class="rounded-2xl border border-slate-200 p-5 mt-5">
+                <h4 class="font-extrabold text-slate-900 mb-1">Recommended extras</h4>
+                <p class="text-xs text-slate-500 mb-4">Select anything you may need.</p>
+
+                <div class="space-y-3">
+                  <label class="flex items-start gap-3 rounded-xl border border-slate-200 p-4 cursor-pointer hover:border-brand-teal">
+                    <input type="checkbox" name="rem_extra" value="Storage required" class="mt-1 rounded text-brand-teal focus:ring-brand-teal">
+                    <div class="flex-1">
+                      <div class="font-bold text-sm text-slate-900">Storage after your move</div>
+                      <div class="text-xs text-slate-500 mt-1">Secure Valet storage if you need it.</div>
+                    </div>
+                  </label>
+
+                  <label class="flex items-start gap-3 rounded-xl border border-slate-200 p-4 cursor-pointer hover:border-brand-teal">
+                    <input type="checkbox" name="rem_extra" value="Packing boxes / supplies" class="mt-1 rounded text-brand-teal focus:ring-brand-teal">
+                    <div class="flex-1">
+                      <div class="font-bold text-sm text-slate-900">Packing boxes &amp; supplies</div>
+                      <div class="text-xs text-slate-500 mt-1">Boxes, tape and packing materials.</div>
+                    </div>
+                  </label>
+
+                  <label class="flex items-start gap-3 rounded-xl border border-slate-200 p-4 cursor-pointer hover:border-brand-teal">
+                    <input type="checkbox" name="rem_extra" value="Fragile item protection" class="mt-1 rounded text-brand-teal focus:ring-brand-teal">
+                    <div class="flex-1">
+                      <div class="font-bold text-sm text-slate-900">Fragile-item protection</div>
+                      <div class="text-xs text-slate-500 mt-1">Extra wrapping and protection for delicate items.</div>
+                    </div>
+                  </label>
+
+                  <label class="flex items-start gap-3 rounded-xl border border-slate-200 p-4 cursor-pointer hover:border-brand-teal">
+                    <input type="checkbox" name="rem_extra" value="Furniture protection" class="mt-1 rounded text-brand-teal focus:ring-brand-teal">
+                    <div class="flex-1">
+                      <div class="font-bold text-sm text-slate-900">Furniture protection</div>
+                      <div class="text-xs text-slate-500 mt-1">Blankets, covers and corner protectors.</div>
+                    </div>
+                  </label>
+
+                  <label class="flex items-start gap-3 rounded-xl border border-slate-200 p-4 cursor-pointer hover:border-brand-teal">
+                    <input type="checkbox" name="rem_extra" value="Wardrobe box hire" class="mt-1 rounded text-brand-teal focus:ring-brand-teal">
+                    <div class="flex-1">
+                      <div class="font-bold text-sm text-slate-900">Wardrobe box hire</div>
+                      <div class="text-xs text-slate-500 mt-1">Hanging wardrobe boxes delivered to you.</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
+                <button type="button"
+                        onclick="goToRemovalsStep(2)"
+                        class="w-full border border-slate-300 hover:bg-slate-50 text-slate-700 py-3 rounded-lg font-bold text-sm">
+                  ← Back to move details
+                </button>
+
+                <button type="button"
+                        onclick="reviewRemovalsQuote()"
+                        class="w-full bg-brand-teal hover:bg-brand-tealHover text-white py-3 rounded-lg font-bold text-sm">
+                  Continue to review →
+                </button>
+              </div>
             </div>
-          </div>
 
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-2">Email <span class="font-normal text-slate-400">(optional)</span></label>
-            <input name="email" type="email" placeholder="you@example.com"
-                   class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-          </div>
+            <aside class="lg:col-span-4">
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 lg:sticky lg:top-32">
+                <h4 class="text-lg font-extrabold text-slate-900">Your Quote Summary</h4>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-2">Moving from</label>
-              <input required name="moving_from" type="text" placeholder="Postcode / area"
-                     class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+                <div class="mt-5">
+                  <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Selected inventory</div>
+                  <div id="inventoryMiniSummary" class="space-y-2 text-sm text-slate-700"></div>
+                </div>
+
+                <div class="mt-5 border-t border-slate-200 pt-4">
+                  <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Selected extras</div>
+                  <div id="extrasMiniSummary" class="space-y-2 text-sm text-slate-700"></div>
+                </div>
+
+                <div class="mt-5 rounded-xl bg-white border border-slate-200 p-4">
+                  <div class="text-xs font-bold text-slate-500 uppercase tracking-wide">Estimated Total</div>
+                  <div class="font-extrabold text-slate-900 mt-1">Pending client pricing</div>
+                  <div class="text-xs text-slate-500 mt-1">We’ll plug the real pricing rules in once confirmed.</div>
+                </div>
+
+                <button type="button"
+                        onclick="openWhatsAppQuote('removals')"
+                        class="w-full mt-4 border border-brand-whatsapp text-brand-whatsapp hover:bg-green-50 py-3 rounded-lg font-bold text-sm">
+                  Prefer to quote on WhatsApp?
+                </button>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <!-- STEP 4: REVIEW -->
+        <div id="removalsStep4" class="hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+            <div class="lg:col-span-7">
+              <div class="mb-5">
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Review your removals quote.</h3>
+                <p class="text-sm text-slate-500 mt-1">Everything you entered, ready to check before booking.</p>
+              </div>
+
+              <div id="remReviewCards" class="space-y-3"></div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
+                <button type="button"
+                        onclick="goToRemovalsStep(3)"
+                        class="w-full border border-slate-300 hover:bg-slate-50 text-slate-700 py-3 rounded-lg font-bold text-sm">
+                  ← Back to inventory
+                </button>
+
+                <button type="button"
+                        onclick="goToRemovalsStep(5)"
+                        class="w-full bg-brand-orange hover:bg-brand-orangeHover text-white py-3 rounded-lg font-bold text-sm">
+                  Continue to book →
+                </button>
+              </div>
             </div>
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-2">Moving to</label>
-              <input required name="moving_to" type="text" placeholder="Postcode / area"
-                     class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
+
+            <aside class="lg:col-span-5">
+              <div class="rounded-2xl bg-brand-dark text-white p-5 lg:sticky lg:top-32 shadow-xl">
+                <h4 class="text-xl font-extrabold">Your Quote Summary</h4>
+
+                <div id="remReviewSummary" class="mt-5 space-y-3 text-sm"></div>
+
+                <div class="mt-5 border-t border-slate-700 pt-4">
+                  <div class="flex items-center justify-between gap-4">
+                    <span class="font-bold">Estimated Total</span>
+                    <span class="font-extrabold text-lg">Pending pricing</span>
+                  </div>
+                  <p class="text-xs text-slate-400 mt-1">No fake pricing is shown until the client confirms the rates.</p>
+                </div>
+
+                <div class="mt-5 space-y-2 text-xs text-slate-300">
+                  <div>✓ Fully insured</div>
+                  <div>✓ Flexible scheduling</div>
+                  <div>✓ Trained &amp; trusted team</div>
+                </div>
+
+                <button type="button"
+                        onclick="goToRemovalsStep(5)"
+                        class="w-full mt-5 bg-brand-orange hover:bg-brand-orangeHover text-white py-3 rounded-lg font-bold text-sm">
+                  Continue to Book
+                </button>
+
+                <button type="button"
+                        onclick="openWhatsAppQuote('removals')"
+                        class="w-full mt-3 border border-slate-600 hover:bg-slate-800 text-white py-3 rounded-lg font-bold text-sm">
+                  Chat on WhatsApp
+                </button>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <!-- STEP 5: BOOK -->
+        <div id="removalsStep5" class="hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-8">
+              <div class="mb-5">
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Secure your move.</h3>
+                <p class="text-sm text-slate-500 mt-1">Confirm your details before sending the completed quote to Valet.</p>
+              </div>
+
+              <div id="remBookingConfirmation" class="rounded-2xl border border-slate-200 p-5 bg-white"></div>
+
+              <label class="flex items-start gap-3 mt-5 rounded-xl border border-slate-200 p-4">
+                <input id="remTermsCheckbox" type="checkbox" class="mt-1 rounded text-brand-teal focus:ring-brand-teal">
+                <span class="text-sm text-slate-600">
+                  I confirm that the details above are correct and I am ready to discuss and confirm this move with Valet.
+                </span>
+              </label>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
+                <button type="button"
+                        onclick="goToRemovalsStep(4)"
+                        class="w-full border border-slate-300 hover:bg-slate-50 text-slate-700 py-3 rounded-lg font-bold text-sm">
+                  ← Back to review
+                </button>
+
+                <button type="button"
+                        onclick="submitRemovalsBooking()"
+                        class="w-full bg-brand-whatsapp hover:bg-brand-whatsappHover text-white py-3 rounded-lg font-bold text-sm">
+                  Submit &amp; discuss on WhatsApp
+                </button>
+              </div>
             </div>
+
+            <aside class="lg:col-span-4">
+              <div class="rounded-2xl bg-brand-dark text-white p-5 lg:sticky lg:top-32 shadow-xl">
+                <h4 class="text-xl font-extrabold">Your Order Summary</h4>
+                <div id="remBookSummary" class="mt-5 space-y-3 text-sm"></div>
+
+                <div class="mt-5 border-t border-slate-700 pt-4">
+                  <div class="font-bold">Final Estimated Total</div>
+                  <div class="text-lg font-extrabold mt-1">Pending pricing</div>
+                  <p class="text-xs text-slate-400 mt-1">We’ll enable the real figure once pricing is confirmed.</p>
+                </div>
+
+                <button type="button"
+                        onclick="submitRemovalsBooking()"
+                        class="w-full mt-5 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white py-3 rounded-lg font-bold text-sm">
+                  Book via WhatsApp
+                </button>
+              </div>
+            </aside>
           </div>
+        </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-2">Moving date</label>
-              <input required name="moving_date" type="date"
-                     class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-2">Property size</label>
-              <select required name="property_size"
-                      class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-                <option value="">Select property size</option>
-                <option>Studio</option>
-                <option>1 bedroom</option>
-                <option>2 bedrooms</option>
-                <option>3 bedrooms</option>
-                <option>4 bedrooms</option>
-                <option>5+ bedrooms</option>
-                <option>Office / commercial</option>
-                <option>Small move / a few items</option>
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-2">Packing help</label>
-            <select required name="packing"
-                    class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-              <option value="">Select</option>
-              <option>Yes – full packing service</option>
-              <option>Yes – some packing help</option>
-              <option>No – everything will be packed</option>
-              <option>Not sure yet</option>
-            </select>
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-2">What needs moving?</label>
-            <textarea required name="items" rows="3" placeholder="e.g. sofa, beds, wardrobes, dining table, boxes..."
-                      class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange"></textarea>
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-2">Anything else we should know? <span class="font-normal text-slate-400">(optional)</span></label>
-            <textarea name="notes" rows="3" placeholder="Access, parking, stairs, lifts, fragile items..."
-                      class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange"></textarea>
-          </div>
-
-          <button type="submit"
-                  class="w-full bg-brand-orange hover:bg-brand-orangeHover text-white py-3.5 rounded-lg font-bold text-sm transition-all shadow-sm">
-            Continue with Removals Quote
-          </button>
-        </form>
       </section>
 
-      <!-- RESULT PANEL -->
-      <section id="quoteResultPanel" class="hidden">
+      <!-- STORAGE RESULT PANEL -->
+      <section id="quoteResultPanel" class="hidden max-w-3xl mx-auto">
         <div class="text-center mb-6">
           <div class="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto mb-4">
             <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -887,27 +1280,22 @@ Get a Storage Quote
             </svg>
           </div>
           <p class="text-[11px] font-extrabold uppercase tracking-[0.16em] text-brand-teal mb-1">Quote details ready</p>
-          <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">Review your details</h3>
+          <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">Review your storage details</h3>
           <p class="text-sm text-slate-500 mt-1">Submit the details on WhatsApp to discuss and confirm your quote.</p>
         </div>
 
         <div id="quoteResultSummary" class="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-700 space-y-2"></div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
-          <button id="editQuoteButton"
-                  type="button"
+          <button type="button"
                   onclick="editCurrentQuote()"
                   class="w-full border border-slate-300 hover:bg-slate-50 text-slate-700 py-3 rounded-lg font-bold text-sm transition-all">
             Edit details
           </button>
 
-          <button id="submitQuoteWhatsAppButton"
-                  type="button"
+          <button type="button"
                   onclick="submitQuoteToWhatsApp()"
-                  class="w-full bg-brand-whatsapp hover:bg-brand-whatsappHover text-white py-3 rounded-lg font-bold text-sm transition-all inline-flex items-center justify-center gap-2">
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.199.534 1.286.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"></path>
-            </svg>
+                  class="w-full bg-brand-whatsapp hover:bg-brand-whatsappHover text-white py-3 rounded-lg font-bold text-sm transition-all">
             Submit &amp; discuss on WhatsApp
           </button>
         </div>
@@ -919,18 +1307,27 @@ Get a Storage Quote
 <!-- END: Shared Quote Calculator Modal -->
 
 <script>
-/*
-  IMPORTANT:
-  Add the client's WhatsApp number below in international format,
-  with digits only and NO + sign, spaces or dashes.
-  Example UK format: 447700900123
-
-  If left blank, WhatsApp opens with the message ready but lets the user choose a chat.
-*/
 const VALET_WHATSAPP_NUMBER = '';
 
 let activeQuoteType = 'storage';
 let lastQuoteData = null;
+let removalsStep = 2;
+let removalsMoveData = {};
+let removalsInventory = {};
+let removalsExtras = [];
+
+const inventoryItems = [
+  ['Sofa', '🛋️'],
+  ['Bed', '🛏️'],
+  ['Dining Table', '🪑'],
+  ['Wardrobe', '🚪'],
+  ['Boxes', '📦'],
+  ['TV', '📺'],
+  ['Appliances', '🧺'],
+  ['Desk', '🖥️'],
+  ['Bicycle', '🚲'],
+  ['Outdoor Items', '🌿']
+];
 
 function whatsappUrl(message) {
   const encoded = encodeURIComponent(message);
@@ -955,12 +1352,14 @@ function openWhatsAppQuote(type = 'generic') {
 
 function openQuoteModal(type) {
   const modal = document.getElementById('quoteCalculatorModal');
-
-  // Generic Online Quote Portal entry defaults to Storage.
   activeQuoteType = type === 'removals' ? 'removals' : 'storage';
 
   document.getElementById('quoteResultPanel').classList.add('hidden');
   switchQuotePanel(activeQuoteType);
+
+  if (activeQuoteType === 'removals') {
+    goToRemovalsStep(2);
+  }
 
   modal.classList.remove('hidden');
   modal.classList.add('flex');
@@ -999,6 +1398,8 @@ function switchQuotePanel(type) {
 
     removalsTab.className = 'quote-tab rounded-lg px-3 py-2.5 text-sm font-bold transition-all bg-white text-brand-orange shadow-sm';
     storageTab.className = 'quote-tab rounded-lg px-3 py-2.5 text-sm font-bold transition-all text-slate-500 hover:text-slate-800';
+
+    goToRemovalsStep(removalsStep || 2);
   }
 }
 
@@ -1034,6 +1435,7 @@ function prettyDate(value) {
   });
 }
 
+/* STORAGE */
 function showQuoteResult(type, data) {
   activeQuoteType = type;
   lastQuoteData = { type, data };
@@ -1044,35 +1446,17 @@ function showQuoteResult(type, data) {
   const result = document.getElementById('quoteResultPanel');
   const summary = document.getElementById('quoteResultSummary');
 
-  let rows = [];
-
-  if (type === 'storage') {
-    rows = [
-      ['Service', 'Valet Storage'],
-      ['Name', data.name],
-      ['Phone', data.phone],
-      ['Email', data.email || '—'],
-      ['Collection area', data.postcode],
-      ['Valet Boxes', data.boxes],
-      ['Storage duration', data.duration],
-      ['Preferred collection date', prettyDate(data.collection_date)],
-      ['Notes', data.notes || '—']
-    ];
-  } else {
-    rows = [
-      ['Service', 'Valet Removals'],
-      ['Name', data.name],
-      ['Phone', data.phone],
-      ['Email', data.email || '—'],
-      ['Moving from', data.moving_from],
-      ['Moving to', data.moving_to],
-      ['Moving date', prettyDate(data.moving_date)],
-      ['Property size', data.property_size],
-      ['Packing', data.packing],
-      ['Items', data.items],
-      ['Notes', data.notes || '—']
-    ];
-  }
+  const rows = [
+    ['Service', 'Valet Storage'],
+    ['Name', data.name],
+    ['Phone', data.phone],
+    ['Email', data.email || '—'],
+    ['Collection area', data.postcode],
+    ['Valet Boxes', data.boxes],
+    ['Storage duration', data.duration],
+    ['Preferred collection date', prettyDate(data.collection_date)],
+    ['Notes', data.notes || '—']
+  ];
 
   summary.innerHTML = rows.map(([label, value]) => `
     <div class="grid grid-cols-[120px_1fr] sm:grid-cols-[160px_1fr] gap-3 border-b border-slate-200 last:border-b-0 pb-2 last:pb-0">
@@ -1090,40 +1474,20 @@ function editCurrentQuote() {
   switchQuotePanel(lastQuoteData.type);
 }
 
-function buildQuoteWhatsAppMessage() {
-  if (!lastQuoteData) return '';
-
-  const { type, data } = lastQuoteData;
-
-  if (type === 'storage') {
-    return [
-      "Hi, I'd like to discuss my Valet Storage quote.",
-      "",
-      `Name: ${data.name}`,
-      `Phone: ${data.phone}`,
-      data.email ? `Email: ${data.email}` : null,
-      `Collection area: ${data.postcode}`,
-      `Valet Boxes: ${data.boxes}`,
-      `Storage duration: ${data.duration}`,
-      `Preferred collection date: ${prettyDate(data.collection_date)}`,
-      data.notes ? `Notes: ${data.notes}` : null,
-      "",
-      "Please can you confirm the quote and next steps?"
-    ].filter(Boolean).join('\n');
-  }
+function buildStorageWhatsAppMessage() {
+  if (!lastQuoteData || lastQuoteData.type !== 'storage') return '';
+  const data = lastQuoteData.data;
 
   return [
-    "Hi, I'd like to discuss my Valet Removals quote.",
+    "Hi, I'd like to discuss my Valet Storage quote.",
     "",
     `Name: ${data.name}`,
     `Phone: ${data.phone}`,
     data.email ? `Email: ${data.email}` : null,
-    `Moving from: ${data.moving_from}`,
-    `Moving to: ${data.moving_to}`,
-    `Moving date: ${prettyDate(data.moving_date)}`,
-    `Property size: ${data.property_size}`,
-    `Packing: ${data.packing}`,
-    `Items: ${data.items}`,
+    `Collection area: ${data.postcode}`,
+    `Valet Boxes: ${data.boxes}`,
+    `Storage duration: ${data.duration}`,
+    `Preferred collection date: ${prettyDate(data.collection_date)}`,
     data.notes ? `Notes: ${data.notes}` : null,
     "",
     "Please can you confirm the quote and next steps?"
@@ -1131,26 +1495,306 @@ function buildQuoteWhatsAppMessage() {
 }
 
 function submitQuoteToWhatsApp() {
-  const message = buildQuoteWhatsAppMessage();
+  const message = buildStorageWhatsAppMessage();
   if (!message) return;
   window.open(whatsappUrl(message), '_blank', 'noopener');
 }
 
-// Storage form
+/* REMOVALS STEPS */
+function goToRemovalsStep(step) {
+  removalsStep = step;
+
+  [2,3,4,5].forEach(n => {
+    const el = document.getElementById(`removalsStep${n}`);
+    if (el) el.classList.toggle('hidden', n !== step);
+  });
+
+  updateRemovalsStepper();
+
+  if (step === 3) {
+    renderInventory();
+    refreshInventorySummary();
+  }
+
+  if (step === 4) {
+    renderRemovalsReview();
+  }
+
+  if (step === 5) {
+    renderRemovalsBooking();
+  }
+
+  const modalBox = document.querySelector('#quoteCalculatorModal > div');
+  if (modalBox) modalBox.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateRemovalsStepper() {
+  for (let i = 1; i <= 5; i++) {
+    const dot = document.getElementById(`remStepDot${i}`);
+    if (!dot) continue;
+
+    const completed = i === 1 || i < removalsStep;
+    const active = i === removalsStep;
+
+    if (completed) {
+      dot.className = 'w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold bg-brand-teal text-white';
+      dot.textContent = '✓';
+    } else if (active) {
+      dot.className = 'w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold bg-white text-brand-teal border-2 border-brand-teal ring-2 ring-cyan-100';
+      dot.textContent = i;
+    } else {
+      dot.className = 'w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold bg-white text-slate-500 border border-slate-300';
+      dot.textContent = i;
+    }
+  }
+}
+
+function renderInventory() {
+  const grid = document.getElementById('inventoryGrid');
+
+  grid.innerHTML = inventoryItems.map(([name, icon]) => {
+    const qty = removalsInventory[name] || 0;
+
+    return `
+      <div class="rounded-xl border border-slate-200 p-3 text-center bg-white">
+        <div class="text-3xl mb-2">${icon}</div>
+        <div class="text-xs font-bold text-slate-900 min-h-[32px] flex items-center justify-center">${escapeHtml(name)}</div>
+        <div class="mt-3 flex items-center justify-center gap-3">
+          <button type="button" onclick="changeInventory('${name.replaceAll("'", "\\'")}', -1)"
+                  class="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center text-slate-600 hover:bg-slate-50">−</button>
+          <span class="w-5 text-sm font-bold">${qty}</span>
+          <button type="button" onclick="changeInventory('${name.replaceAll("'", "\\'")}', 1)"
+                  class="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center text-slate-600 hover:bg-slate-50">+</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function changeInventory(name, delta) {
+  const current = removalsInventory[name] || 0;
+  removalsInventory[name] = Math.max(0, current + delta);
+
+  if (removalsInventory[name] === 0) {
+    delete removalsInventory[name];
+  }
+
+  renderInventory();
+  refreshInventorySummary();
+}
+
+function clearInventory() {
+  removalsInventory = {};
+  renderInventory();
+  refreshInventorySummary();
+}
+
+function selectedExtras() {
+  removalsExtras = Array.from(document.querySelectorAll('input[name="rem_extra"]:checked'))
+    .map(cb => cb.value);
+  return removalsExtras;
+}
+
+function refreshInventorySummary() {
+  const inv = document.getElementById('inventoryMiniSummary');
+  const extras = document.getElementById('extrasMiniSummary');
+
+  const inventoryEntries = Object.entries(removalsInventory).filter(([, qty]) => qty > 0);
+
+  inv.innerHTML = inventoryEntries.length
+    ? inventoryEntries.slice(0, 8).map(([name, qty]) => `
+        <div class="flex items-center justify-between gap-3">
+          <span>${escapeHtml(name)}</span>
+          <strong>${qty}</strong>
+        </div>
+      `).join('')
+    : '<p class="text-slate-400 text-xs">No items added yet.</p>';
+
+  const extrasList = selectedExtras();
+
+  extras.innerHTML = extrasList.length
+    ? extrasList.map(name => `<div>✓ ${escapeHtml(name)}</div>`).join('')
+    : '<p class="text-slate-400 text-xs">No extras selected.</p>';
+}
+
+function reviewRemovalsQuote() {
+  selectedExtras();
+  goToRemovalsStep(4);
+}
+
+function reviewCard(title, body, editStep) {
+  return `
+    <div class="rounded-2xl border border-slate-200 bg-white p-5">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <h4 class="font-extrabold text-slate-900">${escapeHtml(title)}</h4>
+          <div class="text-sm text-slate-600 mt-2 leading-relaxed">${body}</div>
+        </div>
+        <button type="button" onclick="goToRemovalsStep(${editStep})"
+                class="text-xs font-bold text-brand-teal hover:underline flex-shrink-0">
+          Edit
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function renderRemovalsReview() {
+  const d = removalsMoveData;
+  const invEntries = Object.entries(removalsInventory).filter(([, qty]) => qty > 0);
+  const extras = selectedExtras();
+
+  const inventoryText = invEntries.length
+    ? invEntries.map(([name, qty]) => `${escapeHtml(name)} × ${qty}`).join(', ')
+    : 'No inventory items added';
+
+  const extrasText = extras.length
+    ? extras.map(escapeHtml).join(', ')
+    : 'No extras selected';
+
+  document.getElementById('remReviewCards').innerHTML = [
+    reviewCard('Service Plan', 'Valet Removals', 2),
+    reviewCard('Move From', `${escapeHtml(d.moving_from || '—')}<br>${escapeHtml(d.property_from || '')}`, 2),
+    reviewCard('Move To', `${escapeHtml(d.moving_to || '—')}<br>${escapeHtml(d.property_to || '')}`, 2),
+    reviewCard('Move Date & Time', `${escapeHtml(prettyDate(d.moving_date) || '—')}<br>${escapeHtml(d.preferred_time || '')}`, 2),
+    reviewCard('Property Details', `${escapeHtml(d.bedrooms || '—')}<br>${escapeHtml(d.access || '—')}`, 2),
+    reviewCard('Inventory Summary', inventoryText, 3),
+    reviewCard('Add-ons & Extras', extrasText, 3)
+  ].join('');
+
+  document.getElementById('remReviewSummary').innerHTML = `
+    <div class="flex items-center justify-between gap-4"><span>Service</span><strong>Valet Removals</strong></div>
+    <div class="flex items-center justify-between gap-4"><span>Bedrooms</span><strong>${escapeHtml(d.bedrooms || '—')}</strong></div>
+    <div class="flex items-center justify-between gap-4"><span>Inventory lines</span><strong>${invEntries.length}</strong></div>
+    <div class="flex items-center justify-between gap-4"><span>Extras</span><strong>${extras.length}</strong></div>
+  `;
+}
+
+function renderRemovalsBooking() {
+  const d = removalsMoveData;
+  const invEntries = Object.entries(removalsInventory).filter(([, qty]) => qty > 0);
+  const extras = selectedExtras();
+
+  document.getElementById('remBookingConfirmation').innerHTML = `
+    <h4 class="font-extrabold text-slate-900 mb-4">Booking confirmation</h4>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+      <div>
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Service</div>
+        <div class="font-semibold text-slate-900">Valet Removals</div>
+      </div>
+
+      <div>
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Move date</div>
+        <div class="font-semibold text-slate-900">${escapeHtml(prettyDate(d.moving_date) || '—')}</div>
+      </div>
+
+      <div>
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Move from</div>
+        <div class="font-semibold text-slate-900">${escapeHtml(d.moving_from || '—')}</div>
+      </div>
+
+      <div>
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Move to</div>
+        <div class="font-semibold text-slate-900">${escapeHtml(d.moving_to || '—')}</div>
+      </div>
+
+      <div>
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Customer</div>
+        <div class="font-semibold text-slate-900">${escapeHtml(d.name || '—')}</div>
+        <div class="text-slate-500">${escapeHtml(d.email || '')}</div>
+        <div class="text-slate-500">${escapeHtml(d.phone || '')}</div>
+      </div>
+
+      <div>
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Inventory / extras</div>
+        <div class="font-semibold text-slate-900">${invEntries.length} inventory types</div>
+        <div class="text-slate-500">${extras.length} extras selected</div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('remBookSummary').innerHTML = `
+    <div class="flex items-center justify-between gap-4"><span>Move</span><strong>${escapeHtml(d.bedrooms || '—')}</strong></div>
+    <div class="flex items-center justify-between gap-4"><span>Date</span><strong>${escapeHtml(prettyDate(d.moving_date) || '—')}</strong></div>
+    <div class="flex items-center justify-between gap-4"><span>Inventory types</span><strong>${invEntries.length}</strong></div>
+    <div class="flex items-center justify-between gap-4"><span>Extras</span><strong>${extras.length}</strong></div>
+  `;
+}
+
+function buildRemovalsWhatsAppMessage() {
+  const d = removalsMoveData;
+  const invEntries = Object.entries(removalsInventory).filter(([, qty]) => qty > 0);
+  const extras = selectedExtras();
+
+  const inventoryLines = invEntries.length
+    ? invEntries.map(([name, qty]) => `- ${name}: ${qty}`)
+    : ['- No inventory items entered'];
+
+  const extraLines = extras.length
+    ? extras.map(item => `- ${item}`)
+    : ['- No extras selected'];
+
+  return [
+    "Hi, I'd like to discuss and confirm my Valet Removals quote.",
+    "",
+    "MOVE DETAILS",
+    `Name: ${d.name || ''}`,
+    `Phone: ${d.phone || ''}`,
+    `Email: ${d.email || ''}`,
+    `Moving from: ${d.moving_from || ''}`,
+    `Moving to: ${d.moving_to || ''}`,
+    `Property from: ${d.property_from || ''}`,
+    `Property to: ${d.property_to || ''}`,
+    `Bedrooms: ${d.bedrooms || ''}`,
+    `Access: ${d.access || ''}`,
+    `Move date: ${prettyDate(d.moving_date)}`,
+    `Preferred time: ${d.preferred_time || ''}`,
+    `Packing: ${d.packing || ''}`,
+    `Disassembly / reassembly: ${d.disassembly || ''}`,
+    d.access_notes ? `Access notes: ${d.access_notes}` : null,
+    "",
+    "INVENTORY",
+    ...inventoryLines,
+    "",
+    "EXTRAS",
+    ...extraLines,
+    "",
+    "Please can you confirm the quote, pricing and next steps?"
+  ].filter(Boolean).join('\n');
+}
+
+function submitRemovalsBooking() {
+  const checkbox = document.getElementById('remTermsCheckbox');
+
+  if (!checkbox.checked) {
+    alert('Please confirm the details before continuing.');
+    return;
+  }
+
+  window.open(whatsappUrl(buildRemovalsWhatsAppMessage()), '_blank', 'noopener');
+}
+
+/* FORM EVENTS */
 document.getElementById('storageQuoteForm').addEventListener('submit', function (e) {
   e.preventDefault();
   if (!this.reportValidity()) return;
   showQuoteResult('storage', cleanFormData(this));
 });
 
-// Removals form
-document.getElementById('removalsQuoteForm').addEventListener('submit', function (e) {
+document.getElementById('removalsMoveDetailsForm').addEventListener('submit', function (e) {
   e.preventDefault();
   if (!this.reportValidity()) return;
-  showQuoteResult('removals', cleanFormData(this));
+
+  removalsMoveData = cleanFormData(this);
+  goToRemovalsStep(3);
 });
 
-// Existing page links -> shared quote modal.
+document.querySelectorAll('input[name="rem_extra"]').forEach(cb => {
+  cb.addEventListener('change', refreshInventorySummary);
+});
+
+/* EXISTING PAGE LINKS */
 document.querySelectorAll('a[href="#quote-storage"]').forEach(link => {
   link.addEventListener('click', function (e) {
     e.preventDefault();
@@ -1165,7 +1809,6 @@ document.querySelectorAll('a[href="#quote-removals"]').forEach(link => {
   });
 });
 
-// Hero Online Quote Portal = neutral entry, Storage shown by default.
 document.querySelectorAll('a[href="#portal"]').forEach(link => {
   link.addEventListener('click', function (e) {
     e.preventDefault();
@@ -1173,7 +1816,6 @@ document.querySelectorAll('a[href="#portal"]').forEach(link => {
   });
 });
 
-// "Removals made simple" online quote = same modal, Removals preselected.
 document.querySelectorAll('a[href="#online-quote"]').forEach(link => {
   link.addEventListener('click', function (e) {
     e.preventDefault();
@@ -1181,7 +1823,6 @@ document.querySelectorAll('a[href="#online-quote"]').forEach(link => {
   });
 });
 
-// Existing WhatsApp buttons.
 document.querySelectorAll('a[href="https://wa.me/"]').forEach(link => {
   link.addEventListener('click', function (e) {
     e.preventDefault();
@@ -1191,24 +1832,22 @@ document.querySelectorAll('a[href="https://wa.me/"]').forEach(link => {
     if (text.includes('quote on whatsapp')) {
       openWhatsAppQuote('removals');
     } else {
-      // Hero "WhatsApp quote portal" stays generic.
       openWhatsAppQuote('generic');
     }
   });
 });
 
-// Close when clicking the dark overlay.
 document.getElementById('quoteCalculatorModal').addEventListener('click', function (e) {
   if (e.target === this) closeQuoteModal();
 });
 
-// Escape key closes modal.
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') closeQuoteModal();
 });
 
-// Initialise Storage as default.
+renderInventory();
 switchQuotePanel('storage');
+updateRemovalsStepper();
 </script>
 
 </body></html>
