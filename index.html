@@ -664,1190 +664,893 @@ Get a Storage Quote
 <!-- END: MainFooter -->
 
 
-<!-- BEGIN: Shared Quote Calculator Modal -->
+<!-- BEGIN: REBUILT STORAGE + REMOVALS BOOKING SYSTEM -->
 <div id="quoteCalculatorModal"
      class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/75 backdrop-blur-sm p-2 sm:p-4"
      aria-hidden="true">
 
-  <div class="relative w-full max-w-6xl max-h-[96vh] overflow-y-auto rounded-2xl sm:rounded-3xl bg-white shadow-2xl">
+  <div class="relative w-full max-w-7xl max-h-[96vh] overflow-y-auto rounded-2xl sm:rounded-3xl bg-white shadow-2xl">
 
-    <!-- Modal Header -->
-    <div class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200 px-4 sm:px-6 py-4 rounded-t-2xl sm:rounded-t-3xl">
-      <div class="flex items-start justify-between gap-4">
-        <div>
-          <p class="text-[11px] font-extrabold uppercase tracking-[0.16em] text-brand-teal mb-1">Valet quote calculator</p>
-          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Get your quote</h2>
-          <p class="text-xs sm:text-sm text-slate-500 mt-1">Choose storage or removals and complete your quote.</p>
-        </div>
-
-        <button type="button"
-                onclick="closeQuoteModal()"
-                class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 flex-shrink-0"
-                aria-label="Close quote calculator">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+    <div class="sticky top-0 z-40 bg-brand-dark text-white border-b border-slate-800 px-4 sm:px-6 py-4 rounded-t-2xl sm:rounded-t-3xl">
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <svg class="w-9 h-9 flex-shrink-0" fill="none" viewBox="0 0 40 40">
+            <path d="M20 3L36 12.2V27.8L20 37L4 27.8V12.2L20 3Z" fill="#111F38"/>
+            <path d="M20 3L36 12.2L20 21.4L4 12.2L20 3Z" fill="#00D1D1"/>
+            <path d="M36 12.2V27.8L20 37V21.4L36 12.2Z" fill="#00A8A8"/>
+            <path d="M4 12.2L20 21.4V37L4 27.8V12.2Z" fill="#EE6425"/>
           </svg>
-        </button>
-      </div>
-
-      <!-- Service switch -->
-      <div class="grid grid-cols-2 gap-2 mt-4 p-1.5 rounded-xl bg-slate-100">
-        <button id="quoteTabStorage"
-                type="button"
-                onclick="switchQuotePanel('storage')"
-                class="quote-tab rounded-lg px-3 py-2.5 text-sm font-bold transition-all">
-          Storage Quote
-        </button>
-
-        <button id="quoteTabRemovals"
-                type="button"
-                onclick="switchQuotePanel('removals')"
-                class="quote-tab rounded-lg px-3 py-2.5 text-sm font-bold transition-all">
-          Removals Quote
+          <div>
+            <div class="font-extrabold tracking-wide">VALET</div>
+            <div class="text-[9px] uppercase tracking-[0.2em] text-slate-300">Storage & Removals</div>
+          </div>
+        </div>
+        <button type="button" onclick="closeQuoteModal()"
+                class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center"
+                aria-label="Close">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-width="2"/>
+          </svg>
         </button>
       </div>
     </div>
 
-    <div class="p-4 sm:p-6">
+    <div id="bookingStepper" class="border-b border-slate-200 bg-white px-4 sm:px-8 py-5"></div>
 
-      <!-- STORAGE PANEL - kept simple for now -->
-      <section id="quotePanelStorage">
-        <div class="max-w-3xl mx-auto">
-          <div class="mb-6">
-            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900">Valet Storage Quote</h3>
-            <p class="text-xs sm:text-sm text-slate-500 mt-1">Tell us what you need stored and for how long.</p>
-          </div>
+    <div class="p-4 sm:p-8">
 
-          <form id="storageQuoteForm" class="space-y-5">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-xs font-bold text-slate-700 mb-2">Name</label>
-                <input required name="name" type="text" placeholder="Your name"
-                       class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
-              </div>
-              <div>
-                <label class="block text-xs font-bold text-slate-700 mb-2">Phone</label>
-                <input required name="phone" type="tel" placeholder="Your phone number"
-                       class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
-              </div>
-            </div>
+      <!-- STORAGE FLOW -->
+      <section id="storageFlow">
 
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-2">Email <span class="font-normal text-slate-400">(optional)</span></label>
-              <input name="email" type="email" placeholder="you@example.com"
-                     class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-2">Collection postcode / area</label>
-              <input required name="postcode" type="text" placeholder="e.g. SW18"
-                     class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-xs font-bold text-slate-700 mb-2">How many Valet Boxes?</label>
-                <input required name="boxes" type="number" min="1" max="100" value="5"
-                       class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
+        <!-- STORAGE STEP 1 -->
+        <div id="storageStep1">
+          <div class="grid grid-cols-1 xl:grid-cols-12 gap-7">
+            <div class="xl:col-span-9">
+              <div class="mb-7">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark">Choose your box plan.</h2>
+                <p class="text-slate-500 mt-2">Tell us roughly how much you need to store.</p>
               </div>
 
-              <div>
-                <label class="block text-xs font-bold text-slate-700 mb-2">How long do you need storage?</label>
-                <select required name="duration"
-                        class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
-                  <option value="">Select duration</option>
-                  <option>1 month</option>
-                  <option>2–3 months</option>
-                  <option>4–6 months</option>
-                  <option>7–12 months</option>
-                  <option>12+ months</option>
-                  <option>Not sure yet</option>
-                </select>
-              </div>
-            </div>
+              <div id="storagePlansGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
 
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-2">Preferred collection date</label>
-              <input required name="collection_date" type="date"
-                     class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal">
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-2">Anything else we should know? <span class="font-normal text-slate-400">(optional)</span></label>
-              <textarea name="notes" rows="3" placeholder="Access details, extra items, questions..."
-                        class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-teal focus:ring-brand-teal"></textarea>
-            </div>
-
-            <button type="submit"
-                    class="w-full bg-brand-teal hover:bg-brand-tealHover text-white py-3.5 rounded-lg font-bold text-sm transition-all shadow-sm">
-              Review Storage Quote
-            </button>
-          </form>
-        </div>
-      </section>
-
-      <!-- REMOVALS PANEL -->
-      <section id="quotePanelRemovals" class="hidden">
-
-        <!-- Removals stepper -->
-        <div class="mb-7 overflow-x-auto">
-          <div class="min-w-[700px] grid grid-cols-5 gap-3 items-start">
-            <div class="flex items-center gap-2">
-              <span id="remStepDot1" class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold"></span>
-              <div>
-                <div class="text-xs font-bold text-slate-800">Quote Method</div>
-                <div class="text-[10px] text-slate-400">Online quote</div>
-              </div>
-            </div>
-            <div class="flex items-center gap-2">
-              <span id="remStepDot2" class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold">2</span>
-              <div>
-                <div class="text-xs font-bold text-slate-800">Move Details</div>
-                <div class="text-[10px] text-slate-400">About your move</div>
-              </div>
-            </div>
-            <div class="flex items-center gap-2">
-              <span id="remStepDot3" class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold">3</span>
-              <div>
-                <div class="text-xs font-bold text-slate-800">Inventory</div>
-                <div class="text-[10px] text-slate-400">Items &amp; extras</div>
-              </div>
-            </div>
-            <div class="flex items-center gap-2">
-              <span id="remStepDot4" class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold">4</span>
-              <div>
-                <div class="text-xs font-bold text-slate-800">Review</div>
-                <div class="text-[10px] text-slate-400">Check your quote</div>
-              </div>
-            </div>
-            <div class="flex items-center gap-2">
-              <span id="remStepDot5" class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold">5</span>
-              <div>
-                <div class="text-xs font-bold text-slate-800">Book</div>
-                <div class="text-[10px] text-slate-400">Confirm &amp; submit</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- STEP 2: MOVE DETAILS -->
-        <div id="removalsStep2">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div class="lg:col-span-8">
-              <div class="mb-5">
-                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Tell us about your move.</h3>
-                <p class="text-sm text-slate-500 mt-1">The more details you share, the more accurate your quote can be.</p>
-              </div>
-
-              <form id="removalsMoveDetailsForm" class="space-y-5">
-
-                <div class="rounded-2xl border border-slate-200 p-5 bg-white">
-                  <h4 class="font-extrabold text-slate-900 mb-4">Move details</h4>
-
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-2">Move from</label>
-                      <input required name="moving_from" type="text" placeholder="Collection address or postcode"
-                             class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-                    </div>
-
-                    <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-2">Move to</label>
-                      <input required name="moving_to" type="text" placeholder="Delivery address or postcode"
-                             class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-                    </div>
-
-                    <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-2">Property type (from)</label>
-                      <select required name="property_from"
-                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-                        <option value="">Select</option>
-                        <option>House</option>
-                        <option>Apartment</option>
-                        <option>Office / Commercial</option>
-                        <option>Storage Unit</option>
-                        <option>Other</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-2">Property type (to)</label>
-                      <select required name="property_to"
-                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-                        <option value="">Select</option>
-                        <option>House</option>
-                        <option>Apartment</option>
-                        <option>Office / Commercial</option>
-                        <option>Storage Unit</option>
-                        <option>Other</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-2">Number of bedrooms</label>
-                      <select required name="bedrooms"
-                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-                        <option value="">Select</option>
-                        <option>Studio</option>
-                        <option>1 Bedroom</option>
-                        <option>2 Bedrooms</option>
-                        <option>3 Bedrooms</option>
-                        <option>4 Bedrooms</option>
-                        <option>5+ Bedrooms</option>
-                        <option>Office / Commercial</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-2">Stairs / lift access</label>
-                      <select required name="access"
-                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-                        <option value="">Select</option>
-                        <option>Ground floor / direct access</option>
-                        <option>Lift available</option>
-                        <option>1 flight of stairs</option>
-                        <option>2 flights of stairs</option>
-                        <option>3+ flights of stairs</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-2">Preferred move date</label>
-                      <input required name="moving_date" type="date"
-                             class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-                    </div>
-
-                    <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-2">Preferred time</label>
-                      <select required name="preferred_time"
-                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-                        <option value="">Select</option>
-                        <option>Morning (8am–12pm)</option>
-                        <option>Afternoon (12pm–5pm)</option>
-                        <option>Evening (5pm–8pm)</option>
-                        <option>Flexible</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                    <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-2">Packing service needed?</label>
-                      <select required name="packing"
-                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-                        <option value="">Select</option>
-                        <option>Yes – full packing service</option>
-                        <option>Yes – some packing help</option>
-                        <option>No</option>
-                        <option>Not sure yet</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-2">Disassembly / reassembly help?</label>
-                      <select required name="disassembly"
-                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-                        <option value="">Select</option>
-                        <option>Yes</option>
-                        <option>No</option>
-                        <option>Not sure yet</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="mt-4">
-                    <label class="block text-xs font-bold text-slate-700 mb-2">Parking / access notes <span class="font-normal text-slate-400">(optional)</span></label>
-                    <textarea name="access_notes" rows="3" maxlength="250" placeholder="Parking, loading access, stairs, lifts, restrictions..."
-                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange"></textarea>
-                  </div>
+              <div class="mt-6 rounded-xl border border-slate-200 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-slate-200">
+                <div class="p-4 flex items-center justify-center gap-3 text-sm font-semibold text-slate-700">
+                  <span class="text-brand-teal text-xl">⌂</span> Delivered to your door
                 </div>
-
-                <div class="rounded-2xl border border-slate-200 p-5 bg-white">
-                  <h4 class="font-extrabold text-slate-900 mb-4">Contact details</h4>
-
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-2">Full name</label>
-                      <input required name="name" type="text"
-                             class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-                    </div>
-
-                    <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-2">Email address</label>
-                      <input required name="email" type="email"
-                             class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-                    </div>
-
-                    <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-2">Phone number</label>
-                      <input required name="phone" type="tel"
-                             class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-                    </div>
-
-                    <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-2">Best time to contact</label>
-                      <select name="best_contact_time"
-                              class="w-full rounded-lg border-slate-300 text-sm focus:border-brand-orange focus:ring-brand-orange">
-                        <option>Morning (8am–12pm)</option>
-                        <option>Afternoon (12pm–5pm)</option>
-                        <option>Evening (5pm–8pm)</option>
-                        <option>Any time</option>
-                      </select>
-                    </div>
-                  </div>
+                <div class="p-4 flex items-center justify-center gap-3 text-sm font-semibold text-slate-700">
+                  <span class="text-brand-teal text-xl">▣</span> Tamper sealed
                 </div>
+                <div class="p-4 flex items-center justify-center gap-3 text-sm font-semibold text-slate-700">
+                  <span class="text-brand-teal text-xl">◇</span> Secure off-site storage
+                </div>
+              </div>
 
-                <button type="submit"
-                        class="w-full bg-brand-teal hover:bg-brand-tealHover text-white py-3.5 rounded-lg font-bold text-sm transition-all shadow-sm">
-                  Continue to inventory →
+              <div class="mt-7">
+                <h3 class="text-xl font-extrabold text-brand-dark">Add-ons</h3>
+                <p class="text-sm text-slate-500 mt-1">Make your storage experience even easier.</p>
+                <div id="storageAddonsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4"></div>
+              </div>
+            </div>
+
+            <aside class="xl:col-span-3">
+              <div class="rounded-2xl border border-slate-200 bg-white shadow-lg p-5 xl:sticky xl:top-24">
+                <h3 class="text-xl font-extrabold text-brand-dark">Your selection</h3>
+                <div id="storageStep1Summary" class="mt-5"></div>
+                <button type="button" onclick="goStorageStep(2)"
+                        class="w-full mt-5 bg-brand-teal hover:bg-brand-tealHover text-white py-3.5 rounded-lg font-bold text-sm">
+                  Continue to collection details →
                 </button>
-              </form>
-            </div>
-
-            <aside class="lg:col-span-4">
-              <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 lg:sticky lg:top-32">
-                <p class="text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-teal">Your removals quote</p>
-                <h4 class="text-xl font-extrabold text-slate-900 mt-2">Move details first</h4>
-                <p class="text-sm text-slate-500 mt-2">Complete your move information, then add inventory and extras.</p>
-
-                <div class="mt-5 space-y-3 text-sm">
-                  <div class="flex gap-3">
-                    <span class="w-6 h-6 rounded-full bg-brand-teal text-white flex items-center justify-center text-xs font-bold">1</span>
-                    <span>Move details</span>
-                  </div>
-                  <div class="flex gap-3">
-                    <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold">2</span>
-                    <span>Inventory &amp; extras</span>
-                  </div>
-                  <div class="flex gap-3">
-                    <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold">3</span>
-                    <span>Review</span>
-                  </div>
-                  <div class="flex gap-3">
-                    <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold">4</span>
-                    <span>Book / WhatsApp handoff</span>
-                  </div>
-                </div>
-
-                <button type="button"
-                        onclick="openWhatsAppQuote('removals')"
-                        class="w-full mt-6 border border-brand-whatsapp text-brand-whatsapp hover:bg-green-50 py-3 rounded-lg font-bold text-sm">
-                  Quote on WhatsApp
-                </button>
+                <p class="text-[11px] text-center text-slate-400 mt-3">You can review everything before confirming.</p>
               </div>
             </aside>
           </div>
         </div>
 
-        <!-- STEP 3: INVENTORY -->
-        <div id="removalsStep3" class="hidden">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div class="lg:col-span-8">
-              <div class="mb-5">
-                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Add your items and choose extras.</h3>
-                <p class="text-sm text-slate-500 mt-1">Build a more accurate removals quote and customise your move.</p>
+        <!-- STORAGE STEP 2 -->
+        <div id="storageStep2" class="hidden">
+          <div class="grid grid-cols-1 xl:grid-cols-12 gap-7">
+            <div class="xl:col-span-8">
+              <div class="mb-7">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark">Collection details.</h2>
+                <p class="text-slate-500 mt-2">Tell us where and when you'd like us to collect your items.</p>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                <div class="flex gap-3"><span class="text-brand-teal text-2xl">⌖</span><div><b class="text-sm">Dublin-wide coverage</b><p class="text-xs text-slate-500">We collect across Dublin and surrounding areas.</p></div></div>
+                <div class="flex gap-3"><span class="text-brand-teal text-2xl">◇</span><div><b class="text-sm">Secure handling</b><p class="text-xs text-slate-500">Careful, professional handling every step.</p></div></div>
+                <div class="flex gap-3"><span class="text-brand-teal text-2xl">◷</span><div><b class="text-sm">Flexible scheduling</b><p class="text-xs text-slate-500">Choose your preferred date and time.</p></div></div>
+              </div>
+
+              <form id="storageCollectionForm" class="rounded-2xl border border-slate-200 p-5 sm:p-6 space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div class="sm:col-span-2">
+                    <label class="form-label">Address</label>
+                    <input required name="address" class="form-input" placeholder="Enter your street address">
+                  </div>
+                  <div>
+                    <label class="form-label">Eircode</label>
+                    <input required name="eircode" class="form-input" placeholder="e.g. D02 XY29">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="form-label">Property type</label>
+                  <select required name="property_type" class="form-input">
+                    <option value="">Select property type</option>
+                    <option>House</option><option>Apartment</option><option>Office / Commercial</option><option>Other</option>
+                  </select>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="form-label">Floor level</label>
+                    <select required name="floor_level" class="form-input">
+                      <option value="">Select floor level</option>
+                      <option>Ground floor</option><option>1st floor</option><option>2nd floor</option><option>3rd floor</option><option>4th+ floor</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="form-label">Lift available?</label>
+                    <select required name="lift" class="form-input">
+                      <option value="">Select an option</option><option>Yes</option><option>No</option><option>Not applicable</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="form-label">Parking notes <span class="font-normal text-slate-400">(optional)</span></label>
+                  <input name="parking_notes" class="form-input" placeholder="Any parking restrictions or instructions?">
+                  <p class="text-xs text-slate-400 mt-1">Helps our team plan the best collection experience.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="form-label">Preferred collection date</label>
+                    <input required name="collection_date" type="date" class="form-input">
+                  </div>
+                  <div>
+                    <label class="form-label">Time window</label>
+                    <select required name="time_window" class="form-input">
+                      <option value="">Select a time window</option>
+                      <option>8:00 AM – 12:00 PM</option><option>12:00 PM – 4:00 PM</option><option>4:00 PM – 8:00 PM</option><option>Flexible</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="rounded-lg bg-cyan-50 text-cyan-800 px-4 py-3 text-xs">
+                  ⓘ Preferred dates and time windows are subject to availability and will be confirmed by Valet.
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="form-label">Full name</label>
+                    <input required name="name" class="form-input" placeholder="Your name">
+                  </div>
+                  <div>
+                    <label class="form-label">Contact phone number</label>
+                    <input required name="phone" type="tel" class="form-input" placeholder="e.g. 087 123 4567">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="form-label">Email address</label>
+                  <input required name="email" type="email" class="form-input" placeholder="you@example.com">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                  <button type="button" onclick="goStorageStep(1)" class="secondary-btn">← Back</button>
+                  <button type="submit" class="primary-btn">Review my booking →</button>
+                </div>
+              </form>
+            </div>
+
+            <aside class="xl:col-span-4">
+              <div class="rounded-2xl border border-slate-200 bg-white shadow-lg p-5 xl:sticky xl:top-24">
+                <h3 class="text-xl font-extrabold text-brand-dark">Your storage summary</h3>
+                <div id="storageCollectionSummary" class="mt-5"></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <!-- STORAGE STEP 3 REVIEW -->
+        <div id="storageStep3" class="hidden">
+          <div class="grid grid-cols-1 xl:grid-cols-12 gap-7">
+            <div class="xl:col-span-8">
+              <div class="mb-7">
+                <h2 class="text-4xl font-extrabold text-brand-dark">Review your <span class="text-brand-teal">booking.</span></h2>
+                <p class="text-slate-500 mt-2">Everything you've selected, clearly shown before confirmation.</p>
+              </div>
+              <div id="storageReviewCards" class="space-y-4"></div>
+
+              <div class="mt-6 rounded-2xl border border-cyan-100 bg-cyan-50/60 p-5">
+                <h3 class="font-extrabold text-brand-dark">Your items are in safe hands.</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-600 mt-3">
+                  <div>✓ Collected by our trusted team</div>
+                  <div>✓ Stored in secure facilities</div>
+                  <div>✓ Returned on your schedule</div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
+                <button type="button" onclick="goStorageStep(2)" class="secondary-btn">Edit details</button>
+                <button type="button" onclick="goStorageStep(4)" class="primary-btn">Confirm this booking →</button>
+              </div>
+            </div>
+
+            <aside class="xl:col-span-4">
+              <div class="rounded-2xl bg-brand-dark text-white p-6 xl:sticky xl:top-24 shadow-xl">
+                <h3 class="text-xl font-extrabold">Your Booking Summary</h3>
+                <p class="text-xs text-slate-400 mt-1">Prices shown are based on the supplied Valet design.</p>
+                <div id="storageReviewPrice" class="mt-5"></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <!-- STORAGE STEP 4 CONFIRM -->
+        <div id="storageStep4" class="hidden">
+          <div class="max-w-4xl mx-auto text-center">
+            <div class="w-20 h-20 rounded-full bg-cyan-50 text-brand-teal flex items-center justify-center text-4xl font-bold mx-auto">✓</div>
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-brand-dark mt-5">Ready to book.</h2>
+            <p class="text-slate-500 mt-2">Review the final details below, then send your booking to Valet.</p>
+
+            <div id="storageConfirmation" class="text-left mt-7 rounded-2xl border border-slate-200 p-6 bg-white shadow-sm"></div>
+
+            <label class="flex text-left items-start gap-3 mt-5 rounded-xl border border-slate-200 p-4">
+              <input id="storageTermsCheckbox" type="checkbox" class="mt-1 rounded text-brand-teal focus:ring-brand-teal">
+              <span class="text-sm text-slate-600">I confirm that these booking details are correct and understand that Valet will confirm availability and finalise the booking.</span>
+            </label>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
+              <button type="button" onclick="goStorageStep(3)" class="secondary-btn">← Back to review</button>
+              <button type="button" onclick="submitStorageBooking()" class="primary-btn">Submit booking on WhatsApp</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- REMOVALS FLOW -->
+      <section id="removalsFlow" class="hidden">
+
+        <!-- REMOVALS STEP 1 -->
+        <div id="removalsStep1">
+          <div class="grid grid-cols-1 xl:grid-cols-12 gap-7">
+            <div class="xl:col-span-8">
+              <div class="mb-7">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark">Tell us about your move.</h2>
+                <p class="text-slate-500 mt-2">Give us the details we need to prepare an accurate removals quote.</p>
+              </div>
+
+              <form id="removalsDetailsForm" class="space-y-5">
+                <div class="rounded-2xl border border-slate-200 p-5 sm:p-6">
+                  <h3 class="font-extrabold text-brand-dark mb-4">Move details</h3>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div><label class="form-label">Move from</label><input required name="moving_from" class="form-input" placeholder="Collection address or postcode"></div>
+                    <div><label class="form-label">Move to</label><input required name="moving_to" class="form-input" placeholder="Delivery address or postcode"></div>
+                    <div><label class="form-label">Property type (from)</label><select required name="property_from" class="form-input"><option value="">Select</option><option>House</option><option>Apartment</option><option>Office / Commercial</option><option>Storage Unit</option><option>Other</option></select></div>
+                    <div><label class="form-label">Property type (to)</label><select required name="property_to" class="form-input"><option value="">Select</option><option>House</option><option>Apartment</option><option>Office / Commercial</option><option>Storage Unit</option><option>Other</option></select></div>
+                    <div><label class="form-label">Number of bedrooms</label><select required name="bedrooms" class="form-input"><option value="">Select</option><option>Studio</option><option>1 Bedroom</option><option>2 Bedrooms</option><option>3 Bedrooms</option><option>4 Bedrooms</option><option>5+ Bedrooms</option><option>Office / Commercial</option></select></div>
+                    <div><label class="form-label">Preferred move date</label><input required name="moving_date" type="date" class="form-input"></div>
+                    <div><label class="form-label">Preferred time</label><select required name="preferred_time" class="form-input"><option value="">Select</option><option>Morning (8am–12pm)</option><option>Afternoon (12pm–5pm)</option><option>Evening (5pm–8pm)</option><option>Flexible</option></select></div>
+                    <div><label class="form-label">Packing service needed?</label><select required name="packing" class="form-input"><option value="">Select</option><option>Yes – full packing service</option><option>Yes – some packing help</option><option>No</option><option>Not sure yet</option></select></div>
+                    <div><label class="form-label">Disassembly / reassembly?</label><select required name="disassembly" class="form-input"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure yet</option></select></div>
+                  </div>
+                </div>
+
+                <div class="rounded-2xl border-2 border-orange-200 bg-orange-50/50 p-5 sm:p-6">
+                  <h3 class="font-extrabold text-brand-dark">Access & parking information</h3>
+                  <p class="text-sm text-slate-600 mt-2">Please give us accurate access information for both addresses. Restricted parking, long carries, stairs or difficult access can affect the final quote and scheduling.</p>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                    <div><label class="form-label">Collection access</label><select required name="collection_access" class="form-input"><option value="">Select</option><option>Ground floor / direct access</option><option>Lift available</option><option>1 flight of stairs</option><option>2 flights of stairs</option><option>3+ flights of stairs</option><option>Other / restricted</option></select></div>
+                    <div><label class="form-label">Delivery access</label><select required name="delivery_access" class="form-input"><option value="">Select</option><option>Ground floor / direct access</option><option>Lift available</option><option>1 flight of stairs</option><option>2 flights of stairs</option><option>3+ flights of stairs</option><option>Other / restricted</option></select></div>
+                  </div>
+                  <div class="mt-4"><label class="form-label">Parking / access notes</label><textarea required name="access_notes" rows="3" class="form-input" placeholder="Parking restrictions, permits, loading bays, distance from vehicle to property, narrow stairs, lift restrictions, etc."></textarea></div>
+                </div>
+
+                <div class="rounded-2xl border border-slate-200 p-5 sm:p-6">
+                  <h3 class="font-extrabold text-brand-dark">Contact details</h3>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                    <div><label class="form-label">Full name</label><input required name="name" class="form-input"></div>
+                    <div><label class="form-label">Email address</label><input required name="email" type="email" class="form-input"></div>
+                    <div><label class="form-label">Phone number</label><input required name="phone" type="tel" class="form-input"></div>
+                    <div><label class="form-label">Best time to contact</label><select name="best_contact_time" class="form-input"><option>Morning (8am–12pm)</option><option>Afternoon (12pm–5pm)</option><option>Evening (5pm–8pm)</option><option>Any time</option></select></div>
+                  </div>
+                </div>
+
+                <button type="submit" class="primary-btn">Continue to inventory →</button>
+              </form>
+            </div>
+
+            <aside class="xl:col-span-4">
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 xl:sticky xl:top-24">
+                <p class="text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-orange">Your removals request</p>
+                <h3 class="text-xl font-extrabold text-brand-dark mt-2">No instant price guessing.</h3>
+                <p class="text-sm text-slate-500 mt-2">Tell us about the move and your inventory. Valet can then review the details and provide the appropriate quote.</p>
+                <div class="mt-5 space-y-3 text-sm">
+                  <div>✓ Move & access details</div><div>✓ Item inventory</div><div>✓ Written item description</div><div>✓ Extras & packing requirements</div><div>✓ Final review</div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <!-- REMOVALS STEP 2 INVENTORY -->
+        <div id="removalsStep2" class="hidden">
+          <div class="grid grid-cols-1 xl:grid-cols-12 gap-7">
+            <div class="xl:col-span-8">
+              <div class="mb-7">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark">Add your items.</h2>
+                <p class="text-slate-500 mt-2">Use the quick inventory and then describe anything else Valet should know.</p>
               </div>
 
               <div class="rounded-2xl border border-slate-200 p-5">
-                <div class="flex items-center justify-between gap-3 mb-4">
-                  <div>
-                    <h4 class="font-extrabold text-slate-900">Inventory: Add your items</h4>
-                    <p class="text-xs text-slate-500 mt-1">Use + and – to set quantities.</p>
-                  </div>
+                <div class="flex items-center justify-between mb-4">
+                  <div><h3 class="font-extrabold text-brand-dark">Inventory</h3><p class="text-xs text-slate-500">Use + and – to set quantities.</p></div>
                   <button type="button" onclick="clearInventory()" class="text-xs font-bold text-slate-500 hover:text-brand-teal">Clear all</button>
                 </div>
-
                 <div id="inventoryGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3"></div>
               </div>
 
               <div class="rounded-2xl border border-slate-200 p-5 mt-5">
-                <h4 class="font-extrabold text-slate-900 mb-1">Recommended extras</h4>
-                <p class="text-xs text-slate-500 mb-4">Select anything you may need.</p>
+                <label class="form-label text-base">Written Description of Removal Items</label>
+                <p class="text-xs text-slate-500 mb-3">Describe the items being moved, especially anything not covered by the quick inventory above. Include unusually large, heavy, fragile or valuable items.</p>
+                <textarea id="removalItemsDescription" rows="6" class="form-input" placeholder="Example: 3-seater sofa, king bed frame and mattress, 20 medium boxes, 65-inch TV, dining table with 6 chairs, large mirror, garden furniture..."></textarea>
+              </div>
 
-                <div class="space-y-3">
-                  <label class="flex items-start gap-3 rounded-xl border border-slate-200 p-4 cursor-pointer hover:border-brand-teal">
-                    <input type="checkbox" name="rem_extra" value="Storage required" class="mt-1 rounded text-brand-teal focus:ring-brand-teal">
-                    <div class="flex-1">
-                      <div class="font-bold text-sm text-slate-900">Storage after your move</div>
-                      <div class="text-xs text-slate-500 mt-1">Secure Valet storage if you need it.</div>
-                    </div>
-                  </label>
-
-                  <label class="flex items-start gap-3 rounded-xl border border-slate-200 p-4 cursor-pointer hover:border-brand-teal">
-                    <input type="checkbox" name="rem_extra" value="Packing boxes / supplies" class="mt-1 rounded text-brand-teal focus:ring-brand-teal">
-                    <div class="flex-1">
-                      <div class="font-bold text-sm text-slate-900">Packing boxes &amp; supplies</div>
-                      <div class="text-xs text-slate-500 mt-1">Boxes, tape and packing materials.</div>
-                    </div>
-                  </label>
-
-                  <label class="flex items-start gap-3 rounded-xl border border-slate-200 p-4 cursor-pointer hover:border-brand-teal">
-                    <input type="checkbox" name="rem_extra" value="Fragile item protection" class="mt-1 rounded text-brand-teal focus:ring-brand-teal">
-                    <div class="flex-1">
-                      <div class="font-bold text-sm text-slate-900">Fragile-item protection</div>
-                      <div class="text-xs text-slate-500 mt-1">Extra wrapping and protection for delicate items.</div>
-                    </div>
-                  </label>
-
-                  <label class="flex items-start gap-3 rounded-xl border border-slate-200 p-4 cursor-pointer hover:border-brand-teal">
-                    <input type="checkbox" name="rem_extra" value="Furniture protection" class="mt-1 rounded text-brand-teal focus:ring-brand-teal">
-                    <div class="flex-1">
-                      <div class="font-bold text-sm text-slate-900">Furniture protection</div>
-                      <div class="text-xs text-slate-500 mt-1">Blankets, covers and corner protectors.</div>
-                    </div>
-                  </label>
-
-                  <label class="flex items-start gap-3 rounded-xl border border-slate-200 p-4 cursor-pointer hover:border-brand-teal">
-                    <input type="checkbox" name="rem_extra" value="Wardrobe box hire" class="mt-1 rounded text-brand-teal focus:ring-brand-teal">
-                    <div class="flex-1">
-                      <div class="font-bold text-sm text-slate-900">Wardrobe box hire</div>
-                      <div class="text-xs text-slate-500 mt-1">Hanging wardrobe boxes delivered to you.</div>
-                    </div>
-                  </label>
+              <div class="rounded-2xl border border-slate-200 p-5 mt-5">
+                <div class="flex items-start gap-3">
+                  <span class="text-2xl text-brand-teal">☆</span>
+                  <div>
+                    <h3 class="font-extrabold text-brand-dark text-lg">Packaging & moving extras</h3>
+                    <p class="text-xs text-slate-500 mt-1">Add any packing materials or services you may need. These are shown separately from the removals quote.</p>
+                  </div>
                 </div>
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
-                <button type="button"
-                        onclick="goToRemovalsStep(2)"
-                        class="w-full border border-slate-300 hover:bg-slate-50 text-slate-700 py-3 rounded-lg font-bold text-sm">
-                  ← Back to move details
-                </button>
-
-                <button type="button"
-                        onclick="reviewRemovalsQuote()"
-                        class="w-full bg-brand-teal hover:bg-brand-tealHover text-white py-3 rounded-lg font-bold text-sm">
-                  Continue to review →
-                </button>
-              </div>
-            </div>
-
-            <aside class="lg:col-span-4">
-              <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 lg:sticky lg:top-32">
-                <h4 class="text-lg font-extrabold text-slate-900">Your Quote Summary</h4>
 
                 <div class="mt-5">
-                  <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Selected inventory</div>
-                  <div id="inventoryMiniSummary" class="space-y-2 text-sm text-slate-700"></div>
-                </div>
-
-                <div class="mt-5 border-t border-slate-200 pt-4">
-                  <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Selected extras</div>
-                  <div id="extrasMiniSummary" class="space-y-2 text-sm text-slate-700"></div>
-                </div>
-
-                <div class="mt-5 rounded-xl bg-white border border-slate-200 p-4">
-                  <div class="text-xs font-bold text-slate-500 uppercase tracking-wide">Estimated Total</div>
-                  <div class="font-extrabold text-slate-900 mt-1">Pending client pricing</div>
-                  <div class="text-xs text-slate-500 mt-1">We’ll plug the real pricing rules in once confirmed.</div>
-                </div>
-
-                <button type="button"
-                        onclick="openWhatsAppQuote('removals')"
-                        class="w-full mt-4 border border-brand-whatsapp text-brand-whatsapp hover:bg-green-50 py-3 rounded-lg font-bold text-sm">
-                  Prefer to quote on WhatsApp?
-                </button>
-              </div>
-            </aside>
-          </div>
-        </div>
-
-        <!-- STEP 4: REVIEW -->
-        <div id="removalsStep4" class="hidden">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-
-            <div class="lg:col-span-7">
-              <div class="mb-5">
-                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Review your removals quote.</h3>
-                <p class="text-sm text-slate-500 mt-1">Everything you entered, ready to check before booking.</p>
-              </div>
-
-              <div id="remReviewCards" class="space-y-3"></div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
-                <button type="button"
-                        onclick="goToRemovalsStep(3)"
-                        class="w-full border border-slate-300 hover:bg-slate-50 text-slate-700 py-3 rounded-lg font-bold text-sm">
-                  ← Back to inventory
-                </button>
-
-                <button type="button"
-                        onclick="goToRemovalsStep(5)"
-                        class="w-full bg-brand-orange hover:bg-brand-orangeHover text-white py-3 rounded-lg font-bold text-sm">
-                  Continue to book →
-                </button>
-              </div>
-            </div>
-
-            <aside class="lg:col-span-5">
-              <div class="rounded-2xl bg-brand-dark text-white p-5 lg:sticky lg:top-32 shadow-xl">
-                <h4 class="text-xl font-extrabold">Your Quote Summary</h4>
-
-                <div id="remReviewSummary" class="mt-5 space-y-3 text-sm"></div>
-
-                <div class="mt-5 border-t border-slate-700 pt-4">
-                  <div class="flex items-center justify-between gap-4">
-                    <span class="font-bold">Estimated Total</span>
-                    <span class="font-extrabold text-lg">Pending pricing</span>
+                  <h4 class="text-sm font-extrabold text-brand-dark mb-3">Packing Box Sets</h4>
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <label class="packing-card">
+                      <input type="checkbox" name="rem_extra" value="10 Box Set — €29">
+                      <div class="packing-card-body">
+                        <div class="text-3xl">📦</div>
+                        <b>10 Box Set</b>
+                        <small>Small & medium boxes. Ideal for a 1–2 bed move.</small>
+                        <strong>€29 <em>per set</em></strong>
+                      </div>
+                    </label>
+                    <label class="packing-card">
+                      <input type="checkbox" name="rem_extra" value="20 Box Set — €49">
+                      <div class="packing-card-body">
+                        <div class="text-3xl">📦📦</div>
+                        <b>20 Box Set</b>
+                        <small>Our most popular set. Great for 2–3 bedroom homes.</small>
+                        <strong>€49 <em>per set</em></strong>
+                      </div>
+                    </label>
+                    <label class="packing-card">
+                      <input type="checkbox" name="rem_extra" value="40 Box Set — €89">
+                      <div class="packing-card-body">
+                        <div class="text-3xl">▦</div>
+                        <b>40 Box Set</b>
+                        <small>Best value for larger moves & families.</small>
+                        <strong>€89 <em>per set</em></strong>
+                      </div>
+                    </label>
                   </div>
-                  <p class="text-xs text-slate-400 mt-1">No fake pricing is shown until the client confirms the rates.</p>
                 </div>
 
-                <div class="mt-5 space-y-2 text-xs text-slate-300">
-                  <div>✓ Fully insured</div>
-                  <div>✓ Flexible scheduling</div>
-                  <div>✓ Trained &amp; trusted team</div>
+                <div class="mt-5">
+                  <h4 class="text-sm font-extrabold text-brand-dark mb-3">Packing Packs</h4>
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <label class="packing-card">
+                      <input type="checkbox" name="rem_extra" value="Basic Packing Pack — €19">
+                      <div class="packing-card-body">
+                        <div class="text-3xl">🧰</div>
+                        <b>Basic Packing Pack</b>
+                        <small>Tape, labels, paper & marker pens.</small>
+                        <strong>€19</strong>
+                      </div>
+                    </label>
+                    <label class="packing-card">
+                      <input type="checkbox" name="rem_extra" value="Fragile Items Pack — €29">
+                      <div class="packing-card-body">
+                        <div class="text-3xl">🫧</div>
+                        <b>Fragile Items Pack</b>
+                        <small>Bubble wrap, foam, tape & labels.</small>
+                        <strong>€29</strong>
+                      </div>
+                    </label>
+                    <label class="packing-card">
+                      <input type="checkbox" name="rem_extra" value="Full Home Packing Kit — €59">
+                      <div class="packing-card-body">
+                        <div class="text-3xl">📦</div>
+                        <b>Full Home Packing Kit</b>
+                        <small>Everything you need to pack your entire home.</small>
+                        <strong>€59</strong>
+                      </div>
+                    </label>
+                  </div>
                 </div>
 
-                <button type="button"
-                        onclick="goToRemovalsStep(5)"
-                        class="w-full mt-5 bg-brand-orange hover:bg-brand-orangeHover text-white py-3 rounded-lg font-bold text-sm">
-                  Continue to Book
-                </button>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-5">
+                  <label class="packing-card horizontal">
+                    <input type="checkbox" name="rem_extra" value="Professional Packing Service — from €220">
+                    <div class="packing-card-body">
+                      <b>Professional Packing Service</b>
+                      <small>Let our team wrap and pack everything for you.</small>
+                      <strong>From €220</strong>
+                    </div>
+                  </label>
+                  <label class="packing-card horizontal">
+                    <input type="checkbox" name="rem_extra" value="Furniture Protection — €40">
+                    <div class="packing-card-body">
+                      <b>Furniture Protection</b>
+                      <small>Blankets, floor covers & corner protectors.</small>
+                      <strong>€40</strong>
+                    </div>
+                  </label>
+                  <label class="packing-card horizontal">
+                    <input type="checkbox" name="rem_extra" value="Wardrobe Box Hire — €15 each">
+                    <div class="packing-card-body">
+                      <b>Wardrobe Box Hire</b>
+                      <small>Hanging wardrobe boxes delivered to you.</small>
+                      <strong>€15 / each</strong>
+                    </div>
+                  </label>
+                </div>
 
-                <button type="button"
-                        onclick="openWhatsAppQuote('removals')"
-                        class="w-full mt-3 border border-slate-600 hover:bg-slate-800 text-white py-3 rounded-lg font-bold text-sm">
-                  Chat on WhatsApp
-                </button>
+                <div class="mt-5">
+                  <label class="extra-row"><input type="checkbox" name="rem_extra" value="Storage required"><span><b>Do you require storage?</b><small>Tell Valet if you also need secure storage after the move.</small></span></label>
+                </div>
               </div>
-            </aside>
-          </div>
-        </div>
-
-        <!-- STEP 5: BOOK -->
-        <div id="removalsStep5" class="hidden">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div class="lg:col-span-8">
-              <div class="mb-5">
-                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Secure your move.</h3>
-                <p class="text-sm text-slate-500 mt-1">Confirm your details before sending the completed quote to Valet.</p>
-              </div>
-
-              <div id="remBookingConfirmation" class="rounded-2xl border border-slate-200 p-5 bg-white"></div>
-
-              <label class="flex items-start gap-3 mt-5 rounded-xl border border-slate-200 p-4">
-                <input id="remTermsCheckbox" type="checkbox" class="mt-1 rounded text-brand-teal focus:ring-brand-teal">
-                <span class="text-sm text-slate-600">
-                  I confirm that the details above are correct and I am ready to discuss and confirm this move with Valet.
-                </span>
-              </label>
 
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
-                <button type="button"
-                        onclick="goToRemovalsStep(4)"
-                        class="w-full border border-slate-300 hover:bg-slate-50 text-slate-700 py-3 rounded-lg font-bold text-sm">
-                  ← Back to review
-                </button>
-
-                <button type="button"
-                        onclick="submitRemovalsBooking()"
-                        class="w-full bg-brand-whatsapp hover:bg-brand-whatsappHover text-white py-3 rounded-lg font-bold text-sm">
-                  Submit &amp; discuss on WhatsApp
-                </button>
+                <button type="button" onclick="goRemovalsStep(1)" class="secondary-btn">← Back to move details</button>
+                <button type="button" onclick="goRemovalsStep(3)" class="primary-btn">Continue to review →</button>
               </div>
             </div>
 
-            <aside class="lg:col-span-4">
-              <div class="rounded-2xl bg-brand-dark text-white p-5 lg:sticky lg:top-32 shadow-xl">
-                <h4 class="text-xl font-extrabold">Your Order Summary</h4>
-                <div id="remBookSummary" class="mt-5 space-y-3 text-sm"></div>
-
-                <div class="mt-5 border-t border-slate-700 pt-4">
-                  <div class="font-bold">Final Estimated Total</div>
-                  <div class="text-lg font-extrabold mt-1">Pending pricing</div>
-                  <p class="text-xs text-slate-400 mt-1">We’ll enable the real figure once pricing is confirmed.</p>
-                </div>
-
-                <button type="button"
-                        onclick="submitRemovalsBooking()"
-                        class="w-full mt-5 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white py-3 rounded-lg font-bold text-sm">
-                  Book via WhatsApp
-                </button>
+            <aside class="xl:col-span-4">
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 xl:sticky xl:top-24">
+                <h3 class="text-lg font-extrabold text-brand-dark">Your Summary</h3>
+                <div class="mt-5"><div class="summary-label">Selected inventory</div><div id="inventoryMiniSummary" class="space-y-2 text-sm"></div></div>
+                <div class="mt-5 border-t pt-4"><div class="summary-label">Selected extras</div><div id="extrasMiniSummary" class="space-y-2 text-sm"></div></div>
+                <div class="mt-5 border-t pt-4"><div class="summary-label">Written description</div><div id="descriptionMiniSummary" class="text-sm text-slate-600 break-words">Not added yet.</div></div>
               </div>
             </aside>
           </div>
         </div>
 
-      </section>
+        <!-- REMOVALS STEP 3 REVIEW -->
+        <div id="removalsStep3" class="hidden">
+          <div class="grid grid-cols-1 xl:grid-cols-12 gap-7">
+            <div class="xl:col-span-8">
+              <div class="mb-7">
+                <h2 class="text-4xl font-extrabold text-brand-dark">Review your <span class="text-brand-teal">details.</span></h2>
+                <p class="text-slate-500 mt-2">Check the information before sending it to Valet for pricing.</p>
+              </div>
+              <div id="removalsReviewCards" class="space-y-4"></div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
+                <button type="button" onclick="goRemovalsStep(2)" class="secondary-btn">← Back to inventory</button>
+                <button type="button" onclick="goRemovalsStep(4)" class="primary-btn">Continue →</button>
+              </div>
+            </div>
 
-      <!-- STORAGE RESULT PANEL -->
-      <section id="quoteResultPanel" class="hidden max-w-3xl mx-auto">
-        <div class="text-center mb-6">
-          <div class="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto mb-4">
-            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
+            <aside class="xl:col-span-4">
+              <div class="rounded-2xl bg-brand-dark text-white p-6 xl:sticky xl:top-24 shadow-xl">
+                <h3 class="text-xl font-extrabold">Your Summary</h3>
+                <div id="removalsReviewSummary" class="mt-5 space-y-3 text-sm"></div>
+                <div class="mt-5 border-t border-slate-700 pt-4">
+                  <p class="font-bold">Pricing</p>
+                  <p class="text-sm text-slate-300 mt-1">Valet will review your move details and confirm the quote with you.</p>
+                </div>
+              </div>
+            </aside>
           </div>
-          <p class="text-[11px] font-extrabold uppercase tracking-[0.16em] text-brand-teal mb-1">Quote details ready</p>
-          <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">Review your storage details</h3>
-          <p class="text-sm text-slate-500 mt-1">Submit the details on WhatsApp to discuss and confirm your quote.</p>
         </div>
 
-        <div id="quoteResultSummary" class="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-700 space-y-2"></div>
+        <!-- REMOVALS STEP 4 SUBMIT -->
+        <div id="removalsStep4" class="hidden">
+          <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-7">
+              <div class="w-20 h-20 rounded-full bg-cyan-50 text-brand-teal flex items-center justify-center text-4xl font-bold mx-auto">✓</div>
+              <h2 class="text-4xl font-extrabold text-brand-dark mt-5">Your removal details are ready.</h2>
+              <p class="text-slate-500 mt-2">Send the completed request to Valet so the team can review and price the move.</p>
+            </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
-          <button type="button"
-                  onclick="editCurrentQuote()"
-                  class="w-full border border-slate-300 hover:bg-slate-50 text-slate-700 py-3 rounded-lg font-bold text-sm transition-all">
-            Edit details
-          </button>
+            <div id="removalsConfirmation" class="rounded-2xl border border-slate-200 p-6"></div>
 
-          <button type="button"
-                  onclick="submitQuoteToWhatsApp()"
-                  class="w-full bg-brand-whatsapp hover:bg-brand-whatsappHover text-white py-3 rounded-lg font-bold text-sm transition-all">
-            Submit &amp; discuss on WhatsApp
-          </button>
+            <label class="flex items-start gap-3 mt-5 rounded-xl border border-slate-200 p-4">
+              <input id="removalsTermsCheckbox" type="checkbox" class="mt-1 rounded text-brand-teal focus:ring-brand-teal">
+              <span class="text-sm text-slate-600">I confirm the information supplied is accurate and understand that final pricing is subject to Valet reviewing the move, inventory and access details.</span>
+            </label>
+
+            <div class="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+              <h3 class="font-extrabold text-brand-dark">How would you like to send your request?</h3>
+              <p class="text-sm text-slate-500 mt-1">You can submit the full job request to Jamie for review, or continue the conversation on WhatsApp.</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                <button type="button" onclick="submitRemovalsByEmail()" class="primary-btn">
+                  ✉ Submit Job Request
+                </button>
+                <button type="button" onclick="submitRemovalsRequest()" class="w-full bg-brand-whatsapp hover:bg-brand-whatsappHover text-white py-3.5 rounded-lg font-bold text-sm">
+                  WhatsApp Jamie
+                </button>
+              </div>
+              <div id="removalsSubmitStatus" class="hidden mt-3 rounded-lg px-4 py-3 text-sm"></div>
+            </div>
+            <button type="button" onclick="goRemovalsStep(3)" class="secondary-btn mt-3">← Back to review</button>
+          </div>
         </div>
+
       </section>
-
     </div>
   </div>
 </div>
-<!-- END: Shared Quote Calculator Modal -->
+<!-- END: REBUILT STORAGE + REMOVALS BOOKING SYSTEM -->
+
+<style>
+.form-label{display:block;font-size:.75rem;font-weight:700;color:#334155;margin-bottom:.5rem}
+.form-input{width:100%;border:1px solid #cbd5e1;border-radius:.5rem;padding:.75rem .85rem;font-size:.875rem;background:#fff;color:#0f172a;outline:none}
+.form-input:focus{border-color:#00a8a8;box-shadow:0 0 0 3px rgba(0,168,168,.12)}
+.primary-btn{width:100%;background:#00a8a8;color:#fff;padding:.875rem 1rem;border-radius:.5rem;font-size:.875rem;font-weight:700;transition:.2s}
+.primary-btn:hover{filter:brightness(.92)}
+.secondary-btn{width:100%;background:#fff;color:#334155;border:1px solid #cbd5e1;padding:.875rem 1rem;border-radius:.5rem;font-size:.875rem;font-weight:700}
+.secondary-btn:hover{background:#f8fafc}
+.summary-label{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin-bottom:.5rem}
+.extra-row{display:flex;gap:.75rem;align-items:flex-start;border:1px solid #e2e8f0;border-radius:.75rem;padding:1rem;cursor:pointer}
+.extra-row:hover{border-color:#00a8a8}
+.extra-row input{margin-top:.2rem}
+.extra-row span{display:flex;flex-direction:column;font-size:.875rem;color:#0f172a}
+.extra-row small{font-size:.75rem;color:#64748b;margin-top:.2rem}
+.packing-card{position:relative;display:block;border:1px solid #e2e8f0;border-radius:.75rem;padding:.85rem;cursor:pointer;background:#fff;transition:.2s}
+.packing-card:hover{border-color:#00a8a8;box-shadow:0 4px 14px rgba(15,23,42,.06)}
+.packing-card>input{position:absolute;right:.75rem;top:.75rem;width:1rem;height:1rem;accent-color:#00a8a8}
+.packing-card:has(input:checked){border-color:#00a8a8;background:rgba(0,168,168,.045)}
+.packing-card-body{display:flex;flex-direction:column;gap:.3rem;padding-right:1.2rem}
+.packing-card-body b{font-size:.82rem;color:#0f172a}
+.packing-card-body small{font-size:.68rem;line-height:1.35;color:#64748b;min-height:2.7em}
+.packing-card-body strong{font-size:.82rem;color:#0f172a;margin-top:.35rem}
+.packing-card-body strong em{font-size:.65rem;font-style:normal;font-weight:500;color:#64748b}
+.packing-card.horizontal .packing-card-body small{min-height:3.4em}
+</style>
 
 <script>
 const VALET_WHATSAPP_NUMBER = '';
+// Add the Make.com webhook URL here when ready.
+// The webhook should receive the JSON request and send the email to Jamie.
+const REMOVALS_EMAIL_WEBHOOK = '';
+// Optional fallback recipient used only if no webhook has been configured.
+const JAMIE_EMAIL = '';
 
-let activeQuoteType = 'storage';
-let lastQuoteData = null;
-let removalsStep = 2;
-let removalsMoveData = {};
-let removalsInventory = {};
-let removalsExtras = [];
-
-const inventoryItems = [
-  ['Sofa', '🛋️'],
-  ['Bed', '🛏️'],
-  ['Dining Table', '🪑'],
-  ['Wardrobe', '🚪'],
-  ['Boxes', '📦'],
-  ['TV', '📺'],
-  ['Appliances', '🧺'],
-  ['Desk', '🖥️'],
-  ['Bicycle', '🚲'],
-  ['Outdoor Items', '🌿']
+const STORAGE_PLANS = [
+  {id:'mini', name:'Valet Mini', boxes:5, price:29, blurb:'Ideal for seasonal storage'},
+  {id:'10', name:'Valet 10', boxes:10, price:49, blurb:'Perfect for students & decluttering'},
+  {id:'stack', name:'Valet Stack', boxes:20, price:79, blurb:'Best for one pallet-sized stack', popular:true},
+  {id:'xl', name:'Valet Stack XL', boxes:40, price:139, blurb:'For larger storage needs'}
 ];
 
-function whatsappUrl(message) {
-  const encoded = encodeURIComponent(message);
-  return VALET_WHATSAPP_NUMBER
-    ? `https://wa.me/${VALET_WHATSAPP_NUMBER}?text=${encoded}`
-    : `https://wa.me/?text=${encoded}`;
+const STORAGE_ADDONS = [
+  {id:'extra_boxes', name:'Extra Boxes', price:4, unit:'/box /mo', description:'Need a few more boxes? Add as many as you like.', quantity:true},
+  {id:'packing_kit', name:'Packing Kit', price:12, unit:'one-time', description:'Everything you need to pack like a pro.'},
+  {id:'express_return', name:'Express Return', price:25, unit:'one-time', description:'Get your boxes back as soon as the next business day.'},
+  {id:'partial_return', name:'Partial Return', price:10, unit:'one-time', description:'Request back just the boxes you need.'}
+];
+
+let activeFlow = 'storage';
+let storageStep = 1;
+let storagePlanId = 'stack';
+let storageAddons = {};
+let storageDetails = {};
+let removalsStep = 1;
+let removalsDetails = {};
+let removalsInventory = {};
+let removalsExtras = [];
+let removalDescription = '';
+
+const inventoryItems = [
+  ['Sofa','🛋️'],['Bed','🛏️'],['Dining Table','🪑'],['Wardrobe','🚪'],['Boxes','📦'],
+  ['TV','📺'],['Appliances','🧺'],['Desk','🖥️'],['Bicycle','🚲'],['Outdoor Items','🌿']
+];
+
+function money(v){ return `€${Number(v).toFixed(2)}`; }
+function esc(v){return String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');}
+function prettyDate(v){if(!v)return '—';const d=new Date(v+'T00:00:00');return isNaN(d)?v:d.toLocaleDateString('en-IE',{weekday:'short',day:'numeric',month:'long',year:'numeric'});}
+function formData(form){const o=Object.fromEntries(new FormData(form).entries());Object.keys(o).forEach(k=>typeof o[k]==='string'&&(o[k]=o[k].trim()));return o;}
+function whatsappUrl(message){const q=encodeURIComponent(message);return VALET_WHATSAPP_NUMBER?`https://wa.me/${VALET_WHATSAPP_NUMBER}?text=${q}`:`https://wa.me/?text=${q}`;}
+
+function openQuoteModal(type='storage'){
+  activeFlow = type === 'removals' ? 'removals' : 'storage';
+  const modal=document.getElementById('quoteCalculatorModal');
+  modal.classList.remove('hidden'); modal.classList.add('flex'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+  if(activeFlow==='storage') goStorageStep(1); else goRemovalsStep(1);
 }
-
-function openWhatsAppQuote(type = 'generic') {
-  let message = "Hi, I'm looking for a quote from Valet Storage & Removals. Can you help me?";
-
-  if (type === 'removals') {
-    message = "Hi, I'm looking for a quote for Valet Removals. Can you help me?";
-  }
-
-  if (type === 'storage') {
-    message = "Hi, I'm looking for a quote for Valet Storage. Can you help me?";
-  }
-
-  window.open(whatsappUrl(message), '_blank', 'noopener');
+function closeQuoteModal(){
+  const modal=document.getElementById('quoteCalculatorModal');
+  modal.classList.add('hidden'); modal.classList.remove('flex'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow='';
 }
+function scrollModalTop(){const box=document.querySelector('#quoteCalculatorModal > div');if(box)box.scrollTo({top:0,behavior:'smooth'});}
 
-function openQuoteModal(type) {
-  const modal = document.getElementById('quoteCalculatorModal');
-  activeQuoteType = type === 'removals' ? 'removals' : 'storage';
-
-  document.getElementById('quoteResultPanel').classList.add('hidden');
-  switchQuotePanel(activeQuoteType);
-
-  if (activeQuoteType === 'removals') {
-    goToRemovalsStep(2);
-  }
-
-  modal.classList.remove('hidden');
-  modal.classList.add('flex');
-  modal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeQuoteModal() {
-  const modal = document.getElementById('quoteCalculatorModal');
-  modal.classList.add('hidden');
-  modal.classList.remove('flex');
-  modal.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-}
-
-function switchQuotePanel(type) {
-  activeQuoteType = type === 'removals' ? 'removals' : 'storage';
-
-  const storagePanel = document.getElementById('quotePanelStorage');
-  const removalsPanel = document.getElementById('quotePanelRemovals');
-  const resultPanel = document.getElementById('quoteResultPanel');
-  const storageTab = document.getElementById('quoteTabStorage');
-  const removalsTab = document.getElementById('quoteTabRemovals');
-
-  resultPanel.classList.add('hidden');
-
-  if (activeQuoteType === 'storage') {
-    storagePanel.classList.remove('hidden');
-    removalsPanel.classList.add('hidden');
-
-    storageTab.className = 'quote-tab rounded-lg px-3 py-2.5 text-sm font-bold transition-all bg-white text-brand-teal shadow-sm';
-    removalsTab.className = 'quote-tab rounded-lg px-3 py-2.5 text-sm font-bold transition-all text-slate-500 hover:text-slate-800';
-  } else {
-    removalsPanel.classList.remove('hidden');
-    storagePanel.classList.add('hidden');
-
-    removalsTab.className = 'quote-tab rounded-lg px-3 py-2.5 text-sm font-bold transition-all bg-white text-brand-orange shadow-sm';
-    storageTab.className = 'quote-tab rounded-lg px-3 py-2.5 text-sm font-bold transition-all text-slate-500 hover:text-slate-800';
-
-    goToRemovalsStep(removalsStep || 2);
-  }
-}
-
-function cleanFormData(form) {
-  const data = Object.fromEntries(new FormData(form).entries());
-
-  Object.keys(data).forEach(key => {
-    if (typeof data[key] === 'string') {
-      data[key] = data[key].trim();
-    }
-  });
-
-  return data;
-}
-
-function escapeHtml(value) {
-  return String(value ?? '')
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
-}
-
-function prettyDate(value) {
-  if (!value) return '';
-  const d = new Date(value + 'T00:00:00');
-  if (Number.isNaN(d.getTime())) return value;
-  return d.toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  });
-}
-
-/* STORAGE */
-function showQuoteResult(type, data) {
-  activeQuoteType = type;
-  lastQuoteData = { type, data };
-
-  document.getElementById('quotePanelStorage').classList.add('hidden');
-  document.getElementById('quotePanelRemovals').classList.add('hidden');
-
-  const result = document.getElementById('quoteResultPanel');
-  const summary = document.getElementById('quoteResultSummary');
-
-  const rows = [
-    ['Service', 'Valet Storage'],
-    ['Name', data.name],
-    ['Phone', data.phone],
-    ['Email', data.email || '—'],
-    ['Collection area', data.postcode],
-    ['Valet Boxes', data.boxes],
-    ['Storage duration', data.duration],
-    ['Preferred collection date', prettyDate(data.collection_date)],
-    ['Notes', data.notes || '—']
-  ];
-
-  summary.innerHTML = rows.map(([label, value]) => `
-    <div class="grid grid-cols-[120px_1fr] sm:grid-cols-[160px_1fr] gap-3 border-b border-slate-200 last:border-b-0 pb-2 last:pb-0">
-      <div class="font-bold text-slate-500">${escapeHtml(label)}</div>
-      <div class="font-semibold text-slate-900 break-words">${escapeHtml(value)}</div>
-    </div>
-  `).join('');
-
-  result.classList.remove('hidden');
-  result.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function editCurrentQuote() {
-  if (!lastQuoteData) return;
-  switchQuotePanel(lastQuoteData.type);
-}
-
-function buildStorageWhatsAppMessage() {
-  if (!lastQuoteData || lastQuoteData.type !== 'storage') return '';
-  const data = lastQuoteData.data;
-
-  return [
-    "Hi, I'd like to discuss my Valet Storage quote.",
-    "",
-    `Name: ${data.name}`,
-    `Phone: ${data.phone}`,
-    data.email ? `Email: ${data.email}` : null,
-    `Collection area: ${data.postcode}`,
-    `Valet Boxes: ${data.boxes}`,
-    `Storage duration: ${data.duration}`,
-    `Preferred collection date: ${prettyDate(data.collection_date)}`,
-    data.notes ? `Notes: ${data.notes}` : null,
-    "",
-    "Please can you confirm the quote and next steps?"
-  ].filter(Boolean).join('\n');
-}
-
-function submitQuoteToWhatsApp() {
-  const message = buildStorageWhatsAppMessage();
-  if (!message) return;
-  window.open(whatsappUrl(message), '_blank', 'noopener');
-}
-
-/* REMOVALS STEPS */
-function goToRemovalsStep(step) {
-  removalsStep = step;
-
-  [2,3,4,5].forEach(n => {
-    const el = document.getElementById(`removalsStep${n}`);
-    if (el) el.classList.toggle('hidden', n !== step);
-  });
-
-  updateRemovalsStepper();
-
-  if (step === 3) {
-    renderInventory();
-    refreshInventorySummary();
-  }
-
-  if (step === 4) {
-    renderRemovalsReview();
-  }
-
-  if (step === 5) {
-    renderRemovalsBooking();
-  }
-
-  const modalBox = document.querySelector('#quoteCalculatorModal > div');
-  if (modalBox) modalBox.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function updateRemovalsStepper() {
-  for (let i = 1; i <= 5; i++) {
-    const dot = document.getElementById(`remStepDot${i}`);
-    if (!dot) continue;
-
-    const completed = i === 1 || i < removalsStep;
-    const active = i === removalsStep;
-
-    if (completed) {
-      dot.className = 'w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold bg-brand-teal text-white';
-      dot.textContent = '✓';
-    } else if (active) {
-      dot.className = 'w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold bg-white text-brand-teal border-2 border-brand-teal ring-2 ring-cyan-100';
-      dot.textContent = i;
-    } else {
-      dot.className = 'w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold bg-white text-slate-500 border border-slate-300';
-      dot.textContent = i;
-    }
-  }
-}
-
-function renderInventory() {
-  const grid = document.getElementById('inventoryGrid');
-
-  grid.innerHTML = inventoryItems.map(([name, icon]) => {
-    const qty = removalsInventory[name] || 0;
-
-    return `
-      <div class="rounded-xl border border-slate-200 p-3 text-center bg-white">
-        <div class="text-3xl mb-2">${icon}</div>
-        <div class="text-xs font-bold text-slate-900 min-h-[32px] flex items-center justify-center">${escapeHtml(name)}</div>
-        <div class="mt-3 flex items-center justify-center gap-3">
-          <button type="button" onclick="changeInventory('${name.replaceAll("'", "\\'")}', -1)"
-                  class="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center text-slate-600 hover:bg-slate-50">−</button>
-          <span class="w-5 text-sm font-bold">${qty}</span>
-          <button type="button" onclick="changeInventory('${name.replaceAll("'", "\\'")}', 1)"
-                  class="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center text-slate-600 hover:bg-slate-50">+</button>
-        </div>
+function renderStepper(){
+  const el=document.getElementById('bookingStepper');
+  const storageLabels=['Choose plan','Collection','Review','Confirm'];
+  const removalLabels=['Move details','Inventory','Review','Submit'];
+  const labels=activeFlow==='storage'?storageLabels:removalLabels;
+  const current=activeFlow==='storage'?storageStep:removalsStep;
+  el.innerHTML=`<div class="max-w-5xl mx-auto grid grid-cols-4 gap-2 sm:gap-5">${labels.map((label,i)=>{
+    const n=i+1, done=n<current, active=n===current;
+    return `<div class="text-center">
+      <div class="flex items-center ${i?'-ml-2':''}">
+        ${i?`<div class="h-px flex-1 ${done||active?'bg-brand-teal':'bg-slate-200'}"></div>`:''}
+        <span class="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex-shrink-0 mx-auto flex items-center justify-center text-xs font-bold ${done?'bg-brand-teal text-white':active?'border-2 border-brand-teal text-brand-teal bg-white':'border border-slate-300 text-slate-500 bg-white'}">${done?'✓':n}</span>
+        ${i<labels.length-1?`<div class="h-px flex-1 ${done?'bg-brand-teal':'bg-slate-200'}"></div>`:''}
       </div>
-    `;
+      <div class="mt-2 text-[10px] sm:text-xs font-bold ${active?'text-brand-teal':'text-slate-600'}">${label}</div>
+    </div>`;
+  }).join('')}</div>`;
+}
+
+function selectedPlan(){return STORAGE_PLANS.find(p=>p.id===storagePlanId)||STORAGE_PLANS[2];}
+function storageTotals(){
+  const plan=selectedPlan();
+  const extraQty=storageAddons.extra_boxes||0;
+  const monthly=plan.price+(extraQty*4);
+  let oneTime=0;
+  ['packing_kit','express_return','partial_return'].forEach(id=>{if(storageAddons[id])oneTime+=STORAGE_ADDONS.find(a=>a.id===id).price;});
+  return {monthly,oneTime,first:monthly+oneTime};
+}
+function renderStoragePlans(){
+  const grid=document.getElementById('storagePlansGrid');
+  if(!grid)return;
+  grid.innerHTML=STORAGE_PLANS.map(p=>`<button type="button" onclick="selectStoragePlan('${p.id}')" class="relative text-left rounded-xl border-2 p-5 transition ${storagePlanId===p.id?'border-brand-teal bg-cyan-50/30':'border-slate-200 hover:border-slate-300'}">
+    ${p.popular?'<span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-teal text-white text-[10px] font-bold px-3 py-1 rounded-full whitespace-nowrap">Most Popular</span>':''}
+    <div class="text-center">
+      <h3 class="text-lg font-extrabold text-brand-teal">${p.name}</h3>
+      <p class="text-sm text-brand-dark mt-1">${p.boxes} boxes</p>
+      <div class="my-5 h-24 flex items-center justify-center">
+        <div class="text-5xl">${p.boxes<=5?'📦':p.boxes<=10?'📦📦':p.boxes<=20?'▦':'▦▦'}</div>
+      </div>
+      <div><span class="text-3xl font-extrabold text-brand-teal">€${p.price}</span><span class="text-sm text-brand-dark"> /mo</span></div>
+      <p class="text-xs text-slate-500 mt-3 min-h-[32px]">${p.blurb}</p>
+    </div>
+  </button>`).join('');
+}
+function selectStoragePlan(id){storagePlanId=id;renderStoragePlans();renderStorageAddons();renderStorageSummary();}
+function renderStorageAddons(){
+  const grid=document.getElementById('storageAddonsGrid'); if(!grid)return;
+  grid.innerHTML=STORAGE_ADDONS.map(a=>{
+    const selected=a.quantity?(storageAddons[a.id]||0)>0:!!storageAddons[a.id];
+    return `<div class="rounded-xl border ${selected?'border-brand-teal bg-cyan-50/20':'border-slate-200'} p-4">
+      <div class="flex items-start justify-between gap-3"><div class="text-3xl">${a.id==='extra_boxes'?'📦':a.id==='packing_kit'?'🧰':a.id==='express_return'?'⚡':'↻'}</div>
+      ${a.quantity?'':`<input type="checkbox" ${selected?'checked':''} onchange="toggleStorageAddon('${a.id}',this.checked)" class="rounded text-brand-teal focus:ring-brand-teal">`}</div>
+      <h4 class="font-extrabold text-brand-dark mt-3">${a.name}</h4><p class="text-xs text-slate-500 mt-1 min-h-[48px]">${a.description}</p>
+      <div class="mt-3 font-extrabold text-brand-teal">€${a.price} <span class="text-xs font-normal text-slate-500">${a.unit}</span></div>
+      ${a.quantity?`<div class="flex items-center gap-3 mt-3"><button type="button" onclick="changeExtraBoxes(-1)" class="w-8 h-8 rounded-full border">−</button><b>${storageAddons.extra_boxes||0}</b><button type="button" onclick="changeExtraBoxes(1)" class="w-8 h-8 rounded-full border">+</button></div>`:''}
+    </div>`;
   }).join('');
 }
-
-function changeInventory(name, delta) {
-  const current = removalsInventory[name] || 0;
-  removalsInventory[name] = Math.max(0, current + delta);
-
-  if (removalsInventory[name] === 0) {
-    delete removalsInventory[name];
-  }
-
-  renderInventory();
-  refreshInventorySummary();
-}
-
-function clearInventory() {
-  removalsInventory = {};
-  renderInventory();
-  refreshInventorySummary();
-}
-
-function selectedExtras() {
-  removalsExtras = Array.from(document.querySelectorAll('input[name="rem_extra"]:checked'))
-    .map(cb => cb.value);
-  return removalsExtras;
-}
-
-function refreshInventorySummary() {
-  const inv = document.getElementById('inventoryMiniSummary');
-  const extras = document.getElementById('extrasMiniSummary');
-
-  const inventoryEntries = Object.entries(removalsInventory).filter(([, qty]) => qty > 0);
-
-  inv.innerHTML = inventoryEntries.length
-    ? inventoryEntries.slice(0, 8).map(([name, qty]) => `
-        <div class="flex items-center justify-between gap-3">
-          <span>${escapeHtml(name)}</span>
-          <strong>${qty}</strong>
-        </div>
-      `).join('')
-    : '<p class="text-slate-400 text-xs">No items added yet.</p>';
-
-  const extrasList = selectedExtras();
-
-  extras.innerHTML = extrasList.length
-    ? extrasList.map(name => `<div>✓ ${escapeHtml(name)}</div>`).join('')
-    : '<p class="text-slate-400 text-xs">No extras selected.</p>';
-}
-
-function reviewRemovalsQuote() {
-  selectedExtras();
-  goToRemovalsStep(4);
-}
-
-function reviewCard(title, body, editStep) {
-  return `
-    <div class="rounded-2xl border border-slate-200 bg-white p-5">
-      <div class="flex items-start justify-between gap-4">
-        <div>
-          <h4 class="font-extrabold text-slate-900">${escapeHtml(title)}</h4>
-          <div class="text-sm text-slate-600 mt-2 leading-relaxed">${body}</div>
-        </div>
-        <button type="button" onclick="goToRemovalsStep(${editStep})"
-                class="text-xs font-bold text-brand-teal hover:underline flex-shrink-0">
-          Edit
-        </button>
-      </div>
+function toggleStorageAddon(id,on){storageAddons[id]=on;renderStorageAddons();renderStorageSummary();}
+function changeExtraBoxes(delta){storageAddons.extra_boxes=Math.max(0,(storageAddons.extra_boxes||0)+delta);renderStorageAddons();renderStorageSummary();}
+function renderStorageSummary(){
+  const p=selectedPlan(),t=storageTotals();
+  const addonLines=[];
+  if(storageAddons.extra_boxes)addonLines.push(`<div class="flex justify-between"><span>Extra boxes × ${storageAddons.extra_boxes}</span><b>${money(storageAddons.extra_boxes*4)}/mo</b></div>`);
+  STORAGE_ADDONS.filter(a=>!a.quantity).forEach(a=>{if(storageAddons[a.id])addonLines.push(`<div class="flex justify-between"><span>${a.name}</span><b>${money(a.price)}</b></div>`);});
+  const content=`<div class="rounded-xl bg-slate-50 p-4">
+      <div class="text-xs text-slate-500">Selected plan</div><div class="font-extrabold text-brand-dark mt-1">${p.name}</div><div class="text-xs text-slate-500">${p.boxes} boxes</div>
     </div>
-  `;
+    <div class="mt-4 space-y-2 text-sm">
+      <div class="flex justify-between"><span>Monthly storage</span><b>${money(p.price)}</b></div>
+      ${addonLines.join('')}
+    </div>
+    <div class="mt-4 border-t pt-4">
+      <div class="flex justify-between text-sm"><span>Ongoing monthly</span><b>${money(t.monthly)}</b></div>
+      ${t.oneTime?`<div class="flex justify-between text-sm mt-2"><span>One-time add-ons</span><b>${money(t.oneTime)}</b></div>`:''}
+      <div class="flex justify-between text-lg mt-3 text-brand-teal"><b>First month total</b><b>${money(t.first)}</b></div>
+    </div>`;
+  ['storageStep1Summary','storageCollectionSummary'].forEach(id=>{const e=document.getElementById(id);if(e)e.innerHTML=content;});
 }
-
-function renderRemovalsReview() {
-  const d = removalsMoveData;
-  const invEntries = Object.entries(removalsInventory).filter(([, qty]) => qty > 0);
-  const extras = selectedExtras();
-
-  const inventoryText = invEntries.length
-    ? invEntries.map(([name, qty]) => `${escapeHtml(name)} × ${qty}`).join(', ')
-    : 'No inventory items added';
-
-  const extrasText = extras.length
-    ? extras.map(escapeHtml).join(', ')
-    : 'No extras selected';
-
-  document.getElementById('remReviewCards').innerHTML = [
-    reviewCard('Service Plan', 'Valet Removals', 2),
-    reviewCard('Move From', `${escapeHtml(d.moving_from || '—')}<br>${escapeHtml(d.property_from || '')}`, 2),
-    reviewCard('Move To', `${escapeHtml(d.moving_to || '—')}<br>${escapeHtml(d.property_to || '')}`, 2),
-    reviewCard('Move Date & Time', `${escapeHtml(prettyDate(d.moving_date) || '—')}<br>${escapeHtml(d.preferred_time || '')}`, 2),
-    reviewCard('Property Details', `${escapeHtml(d.bedrooms || '—')}<br>${escapeHtml(d.access || '—')}`, 2),
-    reviewCard('Inventory Summary', inventoryText, 3),
-    reviewCard('Add-ons & Extras', extrasText, 3)
+function goStorageStep(step){
+  if(step===2&&!storagePlanId)return;
+  storageStep=step; activeFlow='storage';
+  document.getElementById('storageFlow').classList.remove('hidden'); document.getElementById('removalsFlow').classList.add('hidden');
+  [1,2,3,4].forEach(n=>document.getElementById(`storageStep${n}`).classList.toggle('hidden',n!==step));
+  renderStepper(); renderStoragePlans(); renderStorageAddons(); renderStorageSummary();
+  if(step===3)renderStorageReview(); if(step===4)renderStorageConfirmation(); scrollModalTop();
+}
+function storageAddonText(){
+  const rows=[];
+  if(storageAddons.extra_boxes)rows.push(`Extra Boxes × ${storageAddons.extra_boxes} (${money(storageAddons.extra_boxes*4)}/month)`);
+  STORAGE_ADDONS.filter(a=>!a.quantity).forEach(a=>{if(storageAddons[a.id])rows.push(`${a.name} (${money(a.price)})`);});
+  return rows.length?rows.join(', '):'No add-ons';
+}
+function card(title,body,editFn){
+  return `<div class="rounded-2xl border border-slate-200 bg-white p-5"><div class="flex justify-between gap-4"><div><h3 class="font-extrabold text-brand-dark">${title}</h3><div class="text-sm text-slate-600 mt-2 leading-relaxed">${body}</div></div><button type="button" onclick="${editFn}" class="text-xs font-bold text-brand-teal">Edit</button></div></div>`;
+}
+function renderStorageReview(){
+  const p=selectedPlan(),d=storageDetails,t=storageTotals();
+  document.getElementById('storageReviewCards').innerHTML=[
+    card('Storage Plan',`${esc(p.name)} — ${p.boxes} boxes<br><b>${money(p.price)}/month</b>`,'goStorageStep(1)'),
+    card('Collection',`${esc(d.address||'—')}, ${esc(d.eircode||'')}<br>${esc(d.property_type||'')} · ${esc(d.floor_level||'')} · Lift: ${esc(d.lift||'')}<br>${esc(prettyDate(d.collection_date))} · ${esc(d.time_window||'')}`,'goStorageStep(2)'),
+    card('Add-ons',esc(storageAddonText()),'goStorageStep(1)'),
+    card('Contact',`${esc(d.name||'—')}<br>${esc(d.email||'')} · ${esc(d.phone||'')}`,'goStorageStep(2)')
   ].join('');
-
-  document.getElementById('remReviewSummary').innerHTML = `
-    <div class="flex items-center justify-between gap-4"><span>Service</span><strong>Valet Removals</strong></div>
-    <div class="flex items-center justify-between gap-4"><span>Bedrooms</span><strong>${escapeHtml(d.bedrooms || '—')}</strong></div>
-    <div class="flex items-center justify-between gap-4"><span>Inventory lines</span><strong>${invEntries.length}</strong></div>
-    <div class="flex items-center justify-between gap-4"><span>Extras</span><strong>${extras.length}</strong></div>
-  `;
+  document.getElementById('storageReviewPrice').innerHTML=`<div class="space-y-3 text-sm">
+    <div class="flex justify-between"><span>Storage plan</span><b>${money(p.price)}</b></div>
+    ${storageAddons.extra_boxes?`<div class="flex justify-between"><span>Extra boxes</span><b>${money(storageAddons.extra_boxes*4)}/mo</b></div>`:''}
+    ${t.oneTime?`<div class="flex justify-between"><span>One-time add-ons</span><b>${money(t.oneTime)}</b></div>`:''}
+    <div class="border-t border-slate-700 pt-4 flex justify-between text-lg"><b>First month total</b><b class="text-brand-teal">${money(t.first)}</b></div>
+    <div class="rounded-xl border border-brand-teal p-4 mt-4"><div class="text-xs text-slate-300">Ongoing monthly</div><div class="text-3xl font-extrabold text-brand-teal mt-1">${money(t.monthly)}<span class="text-sm text-white"> /mo</span></div></div>
+  </div>`;
+}
+function renderStorageConfirmation(){
+  const p=selectedPlan(),d=storageDetails,t=storageTotals();
+  document.getElementById('storageConfirmation').innerHTML=`<div class="grid grid-cols-1 sm:grid-cols-2 gap-5 text-sm">
+    <div><div class="summary-label">Plan</div><b>${esc(p.name)} — ${p.boxes} boxes</b></div>
+    <div><div class="summary-label">Ongoing monthly</div><b class="text-brand-teal text-xl">${money(t.monthly)}</b></div>
+    <div><div class="summary-label">Collection</div><b>${esc(prettyDate(d.collection_date))}</b><div>${esc(d.time_window||'')}</div></div>
+    <div><div class="summary-label">Address</div><b>${esc(d.address||'')}</b><div>${esc(d.eircode||'')}</div></div>
+    <div><div class="summary-label">Customer</div><b>${esc(d.name||'')}</b><div>${esc(d.email||'')}</div><div>${esc(d.phone||'')}</div></div>
+    <div><div class="summary-label">Add-ons</div><div>${esc(storageAddonText())}</div></div>
+  </div>`;
+}
+function buildStorageMessage(){
+  const p=selectedPlan(),d=storageDetails,t=storageTotals();
+  return [`Hi, I'd like to book Valet Storage.`,``,`STORAGE PLAN`,`Plan: ${p.name} (${p.boxes} boxes)`,`Monthly plan: ${money(p.price)}`,`Add-ons: ${storageAddonText()}`,`Ongoing monthly total: ${money(t.monthly)}`,`First month total shown: ${money(t.first)}`,``,`COLLECTION`,`Name: ${d.name||''}`,`Phone: ${d.phone||''}`,`Email: ${d.email||''}`,`Address: ${d.address||''}`,`Eircode: ${d.eircode||''}`,`Property: ${d.property_type||''}`,`Floor: ${d.floor_level||''}`,`Lift: ${d.lift||''}`,`Parking notes: ${d.parking_notes||'None'}`,`Preferred date: ${prettyDate(d.collection_date)}`,`Time window: ${d.time_window||''}`,``,`Please confirm availability and finalise my booking.`].join('\n');
+}
+function submitStorageBooking(){
+  if(!document.getElementById('storageTermsCheckbox').checked){alert('Please confirm the booking details before continuing.');return;}
+  window.open(whatsappUrl(buildStorageMessage()),'_blank','noopener');
 }
 
-function renderRemovalsBooking() {
-  const d = removalsMoveData;
-  const invEntries = Object.entries(removalsInventory).filter(([, qty]) => qty > 0);
-  const extras = selectedExtras();
-
-  document.getElementById('remBookingConfirmation').innerHTML = `
-    <h4 class="font-extrabold text-slate-900 mb-4">Booking confirmation</h4>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-      <div>
-        <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Service</div>
-        <div class="font-semibold text-slate-900">Valet Removals</div>
-      </div>
-
-      <div>
-        <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Move date</div>
-        <div class="font-semibold text-slate-900">${escapeHtml(prettyDate(d.moving_date) || '—')}</div>
-      </div>
-
-      <div>
-        <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Move from</div>
-        <div class="font-semibold text-slate-900">${escapeHtml(d.moving_from || '—')}</div>
-      </div>
-
-      <div>
-        <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Move to</div>
-        <div class="font-semibold text-slate-900">${escapeHtml(d.moving_to || '—')}</div>
-      </div>
-
-      <div>
-        <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Customer</div>
-        <div class="font-semibold text-slate-900">${escapeHtml(d.name || '—')}</div>
-        <div class="text-slate-500">${escapeHtml(d.email || '')}</div>
-        <div class="text-slate-500">${escapeHtml(d.phone || '')}</div>
-      </div>
-
-      <div>
-        <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Inventory / extras</div>
-        <div class="font-semibold text-slate-900">${invEntries.length} inventory types</div>
-        <div class="text-slate-500">${extras.length} extras selected</div>
-      </div>
-    </div>
-  `;
-
-  document.getElementById('remBookSummary').innerHTML = `
-    <div class="flex items-center justify-between gap-4"><span>Move</span><strong>${escapeHtml(d.bedrooms || '—')}</strong></div>
-    <div class="flex items-center justify-between gap-4"><span>Date</span><strong>${escapeHtml(prettyDate(d.moving_date) || '—')}</strong></div>
-    <div class="flex items-center justify-between gap-4"><span>Inventory types</span><strong>${invEntries.length}</strong></div>
-    <div class="flex items-center justify-between gap-4"><span>Extras</span><strong>${extras.length}</strong></div>
-  `;
+function selectedExtras(){removalsExtras=Array.from(document.querySelectorAll('input[name="rem_extra"]:checked')).map(x=>x.value);return removalsExtras;}
+function renderInventory(){
+  const grid=document.getElementById('inventoryGrid');if(!grid)return;
+  grid.innerHTML=inventoryItems.map(([name,icon])=>{const q=removalsInventory[name]||0;return `<div class="rounded-xl border border-slate-200 p-3 text-center"><div class="text-3xl">${icon}</div><div class="text-xs font-bold min-h-[34px] flex items-center justify-center mt-2">${name}</div><div class="flex items-center justify-center gap-3 mt-3"><button type="button" onclick="changeInventory('${name}',-1)" class="w-7 h-7 rounded-full border">−</button><b>${q}</b><button type="button" onclick="changeInventory('${name}',1)" class="w-7 h-7 rounded-full border">+</button></div></div>`;}).join('');
+}
+function changeInventory(name,delta){removalsInventory[name]=Math.max(0,(removalsInventory[name]||0)+delta);if(!removalsInventory[name])delete removalsInventory[name];renderInventory();refreshRemovalsMini();}
+function clearInventory(){removalsInventory={};renderInventory();refreshRemovalsMini();}
+function refreshRemovalsMini(){
+  const inv=document.getElementById('inventoryMiniSummary'),ex=document.getElementById('extrasMiniSummary'),desc=document.getElementById('descriptionMiniSummary');
+  const entries=Object.entries(removalsInventory);
+  if(inv)inv.innerHTML=entries.length?entries.map(([n,q])=>`<div class="flex justify-between"><span>${esc(n)}</span><b>${q}</b></div>`).join(''):'<span class="text-xs text-slate-400">No items added yet.</span>';
+  const extras=selectedExtras(); if(ex)ex.innerHTML=extras.length?extras.map(x=>`<div>✓ ${esc(x)}</div>`).join(''):'<span class="text-xs text-slate-400">No extras selected.</span>';
+  removalDescription=(document.getElementById('removalItemsDescription')?.value||'').trim();
+  if(desc)desc.textContent=removalDescription||'Not added yet.';
+}
+function goRemovalsStep(step){
+  if(step===3){refreshRemovalsMini();renderRemovalsReview();}
+  if(step===4){refreshRemovalsMini();renderRemovalsConfirmation();}
+  removalsStep=step; activeFlow='removals';
+  document.getElementById('removalsFlow').classList.remove('hidden');document.getElementById('storageFlow').classList.add('hidden');
+  [1,2,3,4].forEach(n=>document.getElementById(`removalsStep${n}`).classList.toggle('hidden',n!==step));
+  renderStepper();renderInventory();refreshRemovalsMini();scrollModalTop();
+}
+function inventoryText(){
+  const e=Object.entries(removalsInventory);return e.length?e.map(([n,q])=>`${n} × ${q}`).join(', '):'No quick-inventory items selected';
+}
+function renderRemovalsReview(){
+  const d=removalsDetails, extras=selectedExtras();
+  removalDescription=(document.getElementById('removalItemsDescription')?.value||removalDescription).trim();
+  document.getElementById('removalsReviewCards').innerHTML=[
+    card('Move From',`${esc(d.moving_from||'—')}<br>${esc(d.property_from||'')} · ${esc(d.collection_access||'')}`,'goRemovalsStep(1)'),
+    card('Move To',`${esc(d.moving_to||'—')}<br>${esc(d.property_to||'')} · ${esc(d.delivery_access||'')}`,'goRemovalsStep(1)'),
+    card('Move Date & Service',`${esc(prettyDate(d.moving_date))} · ${esc(d.preferred_time||'')}<br>${esc(d.bedrooms||'')} · Packing: ${esc(d.packing||'')} · Disassembly: ${esc(d.disassembly||'')}`,'goRemovalsStep(1)'),
+    card('Parking & Access',esc(d.access_notes||'—'),'goRemovalsStep(1)'),
+    card('Inventory',esc(inventoryText()),'goRemovalsStep(2)'),
+    card('Written Description of Removal Items',esc(removalDescription||'No written description added'),'goRemovalsStep(2)'),
+    card('Extras',esc(extras.length?extras.join(', '):'No extras selected'),'goRemovalsStep(2)'),
+    card('Contact',`${esc(d.name||'—')}<br>${esc(d.email||'')} · ${esc(d.phone||'')}`,'goRemovalsStep(1)')
+  ].join('');
+  document.getElementById('removalsReviewSummary').innerHTML=`<div class="flex justify-between"><span>Move</span><b>${esc(d.bedrooms||'—')}</b></div><div class="flex justify-between"><span>Date</span><b>${esc(prettyDate(d.moving_date))}</b></div><div class="flex justify-between"><span>Inventory types</span><b>${Object.keys(removalsInventory).length}</b></div><div class="flex justify-between"><span>Extras</span><b>${extras.length}</b></div>`;
+}
+function renderRemovalsConfirmation(){
+  const d=removalsDetails;
+  document.getElementById('removalsConfirmation').innerHTML=`<div class="grid grid-cols-1 sm:grid-cols-2 gap-5 text-sm">
+    <div><div class="summary-label">Move from</div><b>${esc(d.moving_from||'—')}</b></div>
+    <div><div class="summary-label">Move to</div><b>${esc(d.moving_to||'—')}</b></div>
+    <div><div class="summary-label">Date</div><b>${esc(prettyDate(d.moving_date))}</b><div>${esc(d.preferred_time||'')}</div></div>
+    <div><div class="summary-label">Customer</div><b>${esc(d.name||'')}</b><div>${esc(d.email||'')}</div><div>${esc(d.phone||'')}</div></div>
+    <div class="sm:col-span-2"><div class="summary-label">Inventory</div><div>${esc(inventoryText())}</div></div>
+    <div class="sm:col-span-2"><div class="summary-label">Written item description</div><div class="whitespace-pre-line">${esc(removalDescription||'No description added')}</div></div>
+    <div class="sm:col-span-2"><div class="summary-label">Access / parking</div><div class="whitespace-pre-line">${esc(d.access_notes||'—')}</div></div>
+  </div>`;
+}
+function buildRemovalsMessage(){
+  const d=removalsDetails,extras=selectedExtras(),entries=Object.entries(removalsInventory);
+  return [`Hi, I'd like a Valet Removals quote.`,``,`MOVE DETAILS`,`Name: ${d.name||''}`,`Phone: ${d.phone||''}`,`Email: ${d.email||''}`,`Moving from: ${d.moving_from||''}`,`Moving to: ${d.moving_to||''}`,`Property from: ${d.property_from||''}`,`Property to: ${d.property_to||''}`,`Bedrooms: ${d.bedrooms||''}`,`Move date: ${prettyDate(d.moving_date)}`,`Preferred time: ${d.preferred_time||''}`,`Packing: ${d.packing||''}`,`Disassembly / reassembly: ${d.disassembly||''}`,`Collection access: ${d.collection_access||''}`,`Delivery access: ${d.delivery_access||''}`,`Parking / access notes: ${d.access_notes||''}`,``,`QUICK INVENTORY`,...(entries.length?entries.map(([n,q])=>`- ${n}: ${q}`):['- None selected']),``,`WRITTEN DESCRIPTION OF REMOVAL ITEMS`,removalDescription||'No written description added',``,`EXTRAS`,...(extras.length?extras.map(x=>`- ${x}`):['- None selected']),``,`Please review these details and provide the removals quote and next steps.`].join('\n');
+}
+function submitRemovalsRequest(){
+  if(!document.getElementById('removalsTermsCheckbox').checked){alert('Please confirm the details before continuing.');return;}
+  window.open(whatsappUrl(buildRemovalsMessage()),'_blank','noopener');
 }
 
-function buildRemovalsWhatsAppMessage() {
-  const d = removalsMoveData;
-  const invEntries = Object.entries(removalsInventory).filter(([, qty]) => qty > 0);
-  const extras = selectedExtras();
-
-  const inventoryLines = invEntries.length
-    ? invEntries.map(([name, qty]) => `- ${name}: ${qty}`)
-    : ['- No inventory items entered'];
-
-  const extraLines = extras.length
-    ? extras.map(item => `- ${item}`)
-    : ['- No extras selected'];
-
-  return [
-    "Hi, I'd like to discuss and confirm my Valet Removals quote.",
-    "",
-    "MOVE DETAILS",
-    `Name: ${d.name || ''}`,
-    `Phone: ${d.phone || ''}`,
-    `Email: ${d.email || ''}`,
-    `Moving from: ${d.moving_from || ''}`,
-    `Moving to: ${d.moving_to || ''}`,
-    `Property from: ${d.property_from || ''}`,
-    `Property to: ${d.property_to || ''}`,
-    `Bedrooms: ${d.bedrooms || ''}`,
-    `Access: ${d.access || ''}`,
-    `Move date: ${prettyDate(d.moving_date)}`,
-    `Preferred time: ${d.preferred_time || ''}`,
-    `Packing: ${d.packing || ''}`,
-    `Disassembly / reassembly: ${d.disassembly || ''}`,
-    d.access_notes ? `Access notes: ${d.access_notes}` : null,
-    "",
-    "INVENTORY",
-    ...inventoryLines,
-    "",
-    "EXTRAS",
-    ...extraLines,
-    "",
-    "Please can you confirm the quote, pricing and next steps?"
-  ].filter(Boolean).join('\n');
+function buildRemovalsPayload(){
+  return {
+    type: 'Valet Removals Job Request',
+    submitted_at: new Date().toISOString(),
+    customer: {
+      name: removalsDetails.name || '',
+      email: removalsDetails.email || '',
+      phone: removalsDetails.phone || '',
+      best_contact_time: removalsDetails.best_contact_time || ''
+    },
+    move: {
+      moving_from: removalsDetails.moving_from || '',
+      moving_to: removalsDetails.moving_to || '',
+      property_from: removalsDetails.property_from || '',
+      property_to: removalsDetails.property_to || '',
+      bedrooms: removalsDetails.bedrooms || '',
+      moving_date: removalsDetails.moving_date || '',
+      preferred_time: removalsDetails.preferred_time || '',
+      packing: removalsDetails.packing || '',
+      disassembly: removalsDetails.disassembly || '',
+      collection_access: removalsDetails.collection_access || '',
+      delivery_access: removalsDetails.delivery_access || '',
+      access_notes: removalsDetails.access_notes || ''
+    },
+    inventory: {...removalsInventory},
+    written_description: removalDescription || '',
+    packaging_upsells: selectedExtras(),
+    plain_text_summary: buildRemovalsMessage()
+  };
 }
 
-function submitRemovalsBooking() {
-  const checkbox = document.getElementById('remTermsCheckbox');
+function showRemovalSubmitStatus(message, ok=true){
+  const el=document.getElementById('removalsSubmitStatus');
+  el.classList.remove('hidden','bg-green-50','text-green-800','bg-red-50','text-red-700');
+  el.classList.add(ok?'bg-green-50':'bg-red-50',ok?'text-green-800':'text-red-700');
+  el.textContent=message;
+}
 
-  if (!checkbox.checked) {
+async function submitRemovalsByEmail(){
+  if(!document.getElementById('removalsTermsCheckbox').checked){
     alert('Please confirm the details before continuing.');
     return;
   }
 
-  window.open(whatsappUrl(buildRemovalsWhatsAppMessage()), '_blank', 'noopener');
+  const payload=buildRemovalsPayload();
+
+  if(REMOVALS_EMAIL_WEBHOOK){
+    try{
+      showRemovalSubmitStatus('Submitting your job request…',true);
+      const response=await fetch(REMOVALS_EMAIL_WEBHOOK,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload)
+      });
+      if(!response.ok) throw new Error('Submission failed');
+      showRemovalSubmitStatus('Job request submitted successfully. Jamie will review the details and follow up with you.',true);
+      return;
+    }catch(err){
+      console.error(err);
+      showRemovalSubmitStatus('The online submission could not be sent. Please use WhatsApp or email instead.',false);
+      return;
+    }
+  }
+
+  // Safe fallback while the Make webhook is not yet connected:
+  // opens a pre-filled email instead of pretending the website sent it.
+  const subject=encodeURIComponent(`Valet Removals Job Request — ${removalsDetails.name||'Customer'} — ${prettyDate(removalsDetails.moving_date)}`);
+  const body=encodeURIComponent(buildRemovalsMessage());
+  const recipient=encodeURIComponent(JAMIE_EMAIL);
+  window.location.href=`mailto:${recipient}?subject=${subject}&body=${body}`;
 }
 
-/* FORM EVENTS */
-document.getElementById('storageQuoteForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  if (!this.reportValidity()) return;
-  showQuoteResult('storage', cleanFormData(this));
-});
+document.getElementById('storageCollectionForm').addEventListener('submit',function(e){e.preventDefault();if(!this.reportValidity())return;storageDetails=formData(this);goStorageStep(3);});
+document.getElementById('removalsDetailsForm').addEventListener('submit',function(e){e.preventDefault();if(!this.reportValidity())return;removalsDetails=formData(this);goRemovalsStep(2);});
+document.getElementById('removalItemsDescription').addEventListener('input',refreshRemovalsMini);
+document.querySelectorAll('input[name="rem_extra"]').forEach(cb=>cb.addEventListener('change',refreshRemovalsMini));
 
-document.getElementById('removalsMoveDetailsForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  if (!this.reportValidity()) return;
+document.querySelectorAll('a[href="#quote-storage"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openQuoteModal('storage');}));
+document.querySelectorAll('a[href="#quote-removals"],a[href="#online-quote"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openQuoteModal('removals');}));
+document.querySelectorAll('a[href="#portal"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openQuoteModal('storage');}));
+document.querySelectorAll('a[href="https://wa.me/"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();window.open(whatsappUrl("Hi, I'd like to speak to Valet Storage & Removals."),'_blank','noopener');}));
 
-  removalsMoveData = cleanFormData(this);
-  goToRemovalsStep(3);
-});
+document.getElementById('quoteCalculatorModal').addEventListener('click',function(e){if(e.target===this)closeQuoteModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeQuoteModal();});
 
-document.querySelectorAll('input[name="rem_extra"]').forEach(cb => {
-  cb.addEventListener('change', refreshInventorySummary);
-});
-
-/* EXISTING PAGE LINKS */
-document.querySelectorAll('a[href="#quote-storage"]').forEach(link => {
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-    openQuoteModal('storage');
-  });
-});
-
-document.querySelectorAll('a[href="#quote-removals"]').forEach(link => {
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-    openQuoteModal('removals');
-  });
-});
-
-document.querySelectorAll('a[href="#portal"]').forEach(link => {
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-    openQuoteModal();
-  });
-});
-
-document.querySelectorAll('a[href="#online-quote"]').forEach(link => {
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-    openQuoteModal('removals');
-  });
-});
-
-document.querySelectorAll('a[href="https://wa.me/"]').forEach(link => {
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-
-    const text = this.textContent.toLowerCase();
-
-    if (text.includes('quote on whatsapp')) {
-      openWhatsAppQuote('removals');
-    } else {
-      openWhatsAppQuote('generic');
-    }
-  });
-});
-
-document.getElementById('quoteCalculatorModal').addEventListener('click', function (e) {
-  if (e.target === this) closeQuoteModal();
-});
-
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') closeQuoteModal();
-});
-
-renderInventory();
-switchQuotePanel('storage');
-updateRemovalsStepper();
+renderStoragePlans();renderStorageAddons();renderStorageSummary();renderInventory();renderStepper();
 </script>
 
 </body></html>
