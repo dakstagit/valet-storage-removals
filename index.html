@@ -52,6 +52,12 @@
   </style>
 </head>
 <body class="font-sans text-slate-800 bg-[#F9FBFC] antialiased">
+
+<!-- =========================================================
+     PAGE 1 — HOMEPAGE
+     ========================================================= -->
+<div id="page-home" class="site-page">
+
 <!-- BEGIN: MainHeader -->
 <header class="bg-brand-dark text-white sticky top-0 z-50 border-b border-slate-800/80">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -347,7 +353,7 @@ Choose Your Plan
           Reusable, strong and eco-friendly boxes delivered to your door.
         </p>
       </div>
-      <a class="mt-2 inline-flex items-center text-xs font-semibold text-brand-teal hover:underline" href="#">
+      <a class="mt-2 inline-flex items-center text-xs font-semibold text-brand-teal hover:underline" href="#valet-boxes" onclick="showPage('valet-boxes'); return false;">
         Learn more <span class="ml-1">→</span>
       </a>
     </div>
@@ -370,9 +376,9 @@ Choose Your Plan
           Secure off-site storage with flexible monthly plans.
         </p>
       </div>
-      <a class="mt-2 inline-flex items-center text-xs font-semibold text-brand-teal hover:underline" href="#">
-        Learn more <span class="ml-1">→</span>
-      </a>
+      <a class="mt-2 inline-flex items-center text-xs font-semibold text-brand-teal hover:underline" href="#valet-storage" onclick="showPage('valet-storage'); return false;">
+  Learn more <span class="ml-1">→</span>
+</a>
     </div>
   </div>
 
@@ -393,9 +399,9 @@ Choose Your Plan
           Full-service home moves with care and efficiency.
         </p>
       </div>
-      <a class="mt-2 inline-flex items-center text-xs font-semibold text-brand-orange hover:underline" href="#">
-        Learn more <span class="ml-1">→</span>
-      </a>
+     <a class="mt-2 inline-flex items-center text-xs font-semibold text-brand-orange hover:underline" href="#home-removals" onclick="showPage('home-removals'); return false;">
+  Learn more <span class="ml-1">→</span>
+</a>
     </div>
   </div>
 
@@ -416,9 +422,9 @@ Choose Your Plan
           Small moves for offices, studios and businesses.
         </p>
       </div>
-      <a class="mt-2 inline-flex items-center text-xs font-semibold text-brand-orange hover:underline" href="#">
-        Learn more <span class="ml-1">→</span>
-      </a>
+     <a class="mt-2 inline-flex items-center text-xs font-semibold text-brand-orange hover:underline" href="#office-moves" onclick="showPage('office-moves'); return false;">
+  Learn more <span class="ml-1">→</span>
+</a>
     </div>
   </div>
 </div>
@@ -783,6 +789,1774 @@ Choose Your Plan
 </footer>
 <!-- END: MainFooter -->
 
+</div>
+<!-- =========================================================
+     END PAGE 1 — HOMEPAGE
+     ========================================================= -->
+<!-- =========================================================
+     PAGE 2 — VALET BOXES
+     ========================================================= -->
+<div id="page-valet-boxes" class="site-page hidden">
+
+<!-- BEGIN: ValetBoxesHeader -->
+<header class="bg-brand-dark text-white sticky top-0 z-50 border-b border-slate-800/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+    <a href="#" onclick="showPage('home'); return false;" class="flex items-center gap-3 group">
+      <div class="w-10 h-10 relative flex-shrink-0 flex items-center justify-center">
+        <svg class="w-10 h-10" fill="none" viewBox="0 0 40 40">
+          <path d="M20 3L36 12.2V27.8L20 37L4 27.8V12.2L20 3Z" fill="#111F38"></path>
+          <path d="M20 3L36 12.2L20 21.4L4 12.2L20 3Z" fill="#00D1D1"></path>
+          <path d="M36 12.2V27.8L20 37V21.4L36 12.2Z" fill="#00A8A8"></path>
+          <path d="M4 12.2L20 21.4V37L4 27.8V12.2Z" fill="#EE6425"></path>
+        </svg>
+      </div>
+
+      <div class="leading-none">
+        <span class="block text-xl font-extrabold tracking-wider text-white">VALET</span>
+        <span class="block text-[10px] font-bold tracking-widest text-slate-300 uppercase">Storage &amp; Removals</span>
+      </div>
+    </a>
+
+    <button onclick="showPage('home')" class="text-sm font-semibold text-slate-300 hover:text-white transition-colors">
+      ← Back to Home
+    </button>
+
+  </div>
+</header>
+<!-- END: ValetBoxesHeader -->
+
+
+<!-- BEGIN: ValetBoxesHero -->
+<section class="bg-brand-dark text-white py-16 sm:py-20 lg:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+
+      <div>
+        <span class="inline-flex items-center px-3 py-1 rounded-full bg-brand-teal/15 text-brand-cyan text-xs font-bold uppercase tracking-wider mb-5">
+          Valet Boxes
+        </span>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+          Storage boxes,<br>
+          <span class="text-brand-cyan">delivered to your door.</span>
+        </h1>
+
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl mb-8">
+          Strong, reusable Valet Boxes delivered straight to your home. Pack at your own pace, then we'll collect them and store them securely until you need them back.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="#valet-boxes-plans" class="bg-brand-teal hover:bg-brand-tealHover text-white px-6 py-3.5 rounded-lg font-bold text-sm text-center transition-all shadow-md">
+            Choose Your Plan
+          </a>
+
+          <button onclick="showPage('home')" class="border border-slate-600 hover:border-slate-400 text-white px-6 py-3.5 rounded-lg font-semibold text-sm transition-all">
+            View All Services
+          </button>
+        </div>
+      </div>
+
+
+      <div class="relative">
+        <div class="rounded-3xl overflow-hidden bg-white/5 border border-slate-700 shadow-2xl">
+          <img
+            src="https://southsidegym.ie/wp-content/uploads/2026/09/valet-boxes.png"
+            alt="Valet reusable storage boxes"
+            class="w-full h-[340px] sm:h-[420px] object-cover"
+          >
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- END: ValetBoxesHero -->
+
+
+<!-- BEGIN: ValetBoxesBenefits -->
+<section class="py-14 sm:py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+      <div class="rounded-2xl border border-slate-200 p-6">
+        <div class="w-11 h-11 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <h3 class="font-bold text-slate-900 mb-2">Reusable boxes</h3>
+        <p class="text-xs text-slate-500 leading-relaxed">Strong reusable boxes without the hassle of buying and disposing of cardboard.</p>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 p-6">
+        <div class="w-11 h-11 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10h14V10" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <h3 class="font-bold text-slate-900 mb-2">Delivered to you</h3>
+        <p class="text-xs text-slate-500 leading-relaxed">We bring your Valet Boxes directly to your door so you can start packing.</p>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 p-6">
+        <div class="w-11 h-11 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <h3 class="font-bold text-slate-900 mb-2">Secure storage</h3>
+        <p class="text-xs text-slate-500 leading-relaxed">Once packed, we collect your boxes and take them into secure off-site storage.</p>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 p-6">
+        <div class="w-11 h-11 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M3 12h18M12 3l9 9-9 9" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <h3 class="font-bold text-slate-900 mb-2">Returned when needed</h3>
+        <p class="text-xs text-slate-500 leading-relaxed">When you need your belongings again, arrange delivery back to your door.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- END: ValetBoxesBenefits -->
+
+
+<!-- BEGIN: ValetBoxesHowItWorks -->
+<section class="py-16 sm:py-20 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-12">
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-teal-50 text-brand-teal text-xs font-bold uppercase tracking-wider mb-3">
+        How it works
+      </span>
+
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
+        Storage without the storage-unit trips.
+      </h2>
+
+      <p class="text-sm text-slate-500 max-w-xl mx-auto">
+        We bring the boxes to you, collect them when you're ready and return them when you need them.
+      </p>
+    </div>
+
+    <div class="relative">
+      <div class="hidden lg:block absolute top-7 left-[12%] right-[12%] h-0.5 dotted-track"></div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+
+        <div class="text-center">
+          <div class="w-14 h-14 mx-auto rounded-full bg-white border-2 border-teal-200 flex items-center justify-center shadow-sm mb-5 relative">
+            <span class="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-brand-teal text-white text-xs font-bold flex items-center justify-center">1</span>
+            <svg class="w-6 h-6 text-brand-teal" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-slate-900 mb-2">Book your boxes</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">Tell us how many boxes you need and we'll arrange delivery to your door.</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-14 h-14 mx-auto rounded-full bg-white border-2 border-teal-200 flex items-center justify-center shadow-sm mb-5 relative">
+            <span class="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-brand-teal text-white text-xs font-bold flex items-center justify-center">2</span>
+            <svg class="w-6 h-6 text-brand-teal" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M4 7h16v13H4zM8 3h8l2 4H6l2-4z"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-slate-900 mb-2">Pack your things</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">Fill your boxes with the items you want to store and label what's inside.</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-14 h-14 mx-auto rounded-full bg-white border-2 border-teal-200 flex items-center justify-center shadow-sm mb-5 relative">
+            <span class="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-brand-teal text-white text-xs font-bold flex items-center justify-center">3</span>
+            <svg class="w-6 h-6 text-brand-teal" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M3 21h18M5 21V7l7-4 7 4v14"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-slate-900 mb-2">We collect &amp; store</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">Book your collection and we'll take your packed boxes into secure storage.</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-14 h-14 mx-auto rounded-full bg-white border-2 border-teal-200 flex items-center justify-center shadow-sm mb-5 relative">
+            <span class="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-brand-teal text-white text-xs font-bold flex items-center justify-center">4</span>
+            <svg class="w-6 h-6 text-brand-teal" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M3 12h18M12 3l9 9-9 9"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-slate-900 mb-2">Get them back</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">Ready for your things again? Arrange delivery back to your door.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- END: ValetBoxesHowItWorks -->
+
+
+<!-- BEGIN: ValetBoxesPlans -->
+<section class="py-16 sm:py-20 bg-white" id="valet-boxes-plans">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-12">
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-teal-50 text-brand-teal text-xs font-bold uppercase tracking-wider mb-3">
+        Valet Box Plans
+      </span>
+
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
+        Choose the space you need.
+      </h2>
+
+      <p class="text-sm text-slate-500 max-w-xl mx-auto">
+        Pick the number of Valet Boxes that works for you. We deliver, collect, store and return them when you need them.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+
+      <!-- Plan 1 -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
+        <p class="text-xs font-bold text-brand-teal uppercase tracking-wider mb-2">Small</p>
+        <h3 class="text-2xl font-extrabold text-slate-900 mb-2">5 Boxes</h3>
+        <p class="text-sm text-slate-500 mb-6">
+          Ideal for seasonal items, clothes, books and smaller belongings.
+        </p>
+
+        <ul class="space-y-3 text-sm text-slate-600 mb-8">
+          <li>✓ Boxes delivered to your door</li>
+          <li>✓ Collection when packed</li>
+          <li>✓ Secure off-site storage</li>
+          <li>✓ Return delivery available</li>
+        </ul>
+
+        <a href="#quote-storage" class="block w-full text-center bg-slate-100 hover:bg-slate-200 text-slate-900 px-5 py-3 rounded-lg font-bold text-sm transition-all">
+          Choose 5 Boxes
+        </a>
+      </div>
+
+
+      <!-- Plan 2 -->
+      <div class="rounded-2xl border-2 border-brand-teal bg-white p-7 shadow-lg relative">
+
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-teal text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
+          Most Popular
+        </span>
+
+        <p class="text-xs font-bold text-brand-teal uppercase tracking-wider mb-2">Medium</p>
+        <h3 class="text-2xl font-extrabold text-slate-900 mb-2">10 Boxes</h3>
+        <p class="text-sm text-slate-500 mb-6">
+          A flexible option for decluttering, moving or creating more room at home.
+        </p>
+
+        <ul class="space-y-3 text-sm text-slate-600 mb-8">
+          <li>✓ Boxes delivered to your door</li>
+          <li>✓ Collection when packed</li>
+          <li>✓ Secure off-site storage</li>
+          <li>✓ Return delivery available</li>
+        </ul>
+
+        <a href="#quote-storage" class="block w-full text-center bg-brand-teal hover:bg-brand-tealHover text-white px-5 py-3 rounded-lg font-bold text-sm transition-all shadow-sm">
+          Choose 10 Boxes
+        </a>
+      </div>
+
+
+      <!-- Plan 3 -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
+        <p class="text-xs font-bold text-brand-teal uppercase tracking-wider mb-2">Large</p>
+        <h3 class="text-2xl font-extrabold text-slate-900 mb-2">20 Boxes</h3>
+        <p class="text-sm text-slate-500 mb-6">
+          More room for larger clear-outs, renovations or storing belongings during a move.
+        </p>
+
+        <ul class="space-y-3 text-sm text-slate-600 mb-8">
+          <li>✓ Boxes delivered to your door</li>
+          <li>✓ Collection when packed</li>
+          <li>✓ Secure off-site storage</li>
+          <li>✓ Return delivery available</li>
+        </ul>
+
+        <a href="#quote-storage" class="block w-full text-center bg-slate-100 hover:bg-slate-200 text-slate-900 px-5 py-3 rounded-lg font-bold text-sm transition-all">
+          Choose 20 Boxes
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- END: ValetBoxesPlans -->
+
+
+<!-- BEGIN: ValetBoxesBottomCTA -->
+<section class="py-12 sm:py-14 bg-brand-dark text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-7">
+
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold mb-2">
+          Ready to make some space?
+        </h2>
+        <p class="text-sm text-slate-300">
+          Choose your Valet Box plan and we'll take care of the rest.
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a href="#valet-boxes-plans" class="bg-brand-teal hover:bg-brand-tealHover text-white px-6 py-3 rounded-lg font-bold text-sm text-center transition-all">
+          Choose Your Plan
+        </a>
+
+        <button onclick="showPage('home')" class="border border-slate-600 hover:border-slate-400 px-6 py-3 rounded-lg font-semibold text-sm transition-all">
+          Back to Home
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- END: ValetBoxesBottomCTA -->
+
+
+</div>
+<!-- =========================================================
+     END PAGE 2 — VALET BOXES
+     ========================================================= -->
+
+
+<!-- =========================================================
+     PAGE 3 — VALET STORAGE
+     ========================================================= -->
+<div id="page-valet-storage" class="site-page hidden">
+
+<!-- BEGIN: ValetStorageHeader -->
+<header class="bg-brand-dark text-white sticky top-0 z-50 border-b border-slate-800/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+    <a href="#" onclick="showPage('home'); return false;" class="flex items-center gap-3 group">
+      <div class="w-10 h-10 relative flex-shrink-0 flex items-center justify-center">
+        <svg class="w-10 h-10" fill="none" viewBox="0 0 40 40">
+          <path d="M20 3L36 12.2V27.8L20 37L4 27.8V12.2L20 3Z" fill="#111F38"></path>
+          <path d="M20 3L36 12.2L20 21.4L4 12.2L20 3Z" fill="#00D1D1"></path>
+          <path d="M36 12.2V27.8L20 37V21.4L36 12.2Z" fill="#00A8A8"></path>
+          <path d="M4 12.2L20 21.4V37L4 27.8V12.2Z" fill="#EE6425"></path>
+        </svg>
+      </div>
+
+      <div class="leading-none">
+        <span class="block text-xl font-extrabold tracking-wider text-white">VALET</span>
+        <span class="block text-[10px] font-bold tracking-widest text-slate-300 uppercase">Storage &amp; Removals</span>
+      </div>
+    </a>
+
+    <button onclick="showPage('home')" class="text-sm font-semibold text-slate-300 hover:text-white transition-colors">
+      ← Back to Home
+    </button>
+
+  </div>
+</header>
+<!-- END: ValetStorageHeader -->
+
+
+<!-- BEGIN: ValetStorageHero -->
+<section class="bg-brand-dark text-white py-16 sm:py-20 lg:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+
+      <div>
+        <span class="inline-flex items-center px-3 py-1 rounded-full bg-brand-teal/15 text-brand-cyan text-xs font-bold uppercase tracking-wider mb-5">
+          Valet Storage
+        </span>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+          Secure storage,<br>
+          <span class="text-brand-cyan">without the hassle.</span>
+        </h1>
+
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl mb-8">
+          Flexible storage that comes to you. We collect your belongings from your door, store them securely off-site and return them whenever you need them.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="#valet-storage-plans" class="bg-brand-teal hover:bg-brand-tealHover text-white px-6 py-3.5 rounded-lg font-bold text-sm text-center transition-all shadow-md">
+            Choose Your Plan
+          </a>
+
+          <button onclick="showPage('home')" class="border border-slate-600 hover:border-slate-400 text-white px-6 py-3.5 rounded-lg font-semibold text-sm transition-all">
+            View All Services
+          </button>
+        </div>
+      </div>
+
+
+      <div class="relative">
+        <div class="rounded-3xl overflow-hidden bg-white/5 border border-slate-700 shadow-2xl">
+          <img
+            src="https://southsidegym.ie/wp-content/uploads/2026/09/valet-storage-stacked-crates.png"
+            alt="Valet secure storage"
+            class="w-full h-[340px] sm:h-[420px] object-contain bg-white"
+          >
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- END: ValetStorageHero -->
+
+
+<!-- BEGIN: ValetStorageBenefits -->
+<section class="py-14 sm:py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+      <div class="rounded-2xl border border-slate-200 p-6">
+        <div class="w-11 h-11 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10h14V10" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <h3 class="font-bold text-slate-900 mb-2">Door-to-door service</h3>
+        <p class="text-xs text-slate-500 leading-relaxed">
+          No trips to a storage unit. We collect your belongings directly from your door.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 p-6">
+        <div class="w-11 h-11 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <h3 class="font-bold text-slate-900 mb-2">Secure storage</h3>
+        <p class="text-xs text-slate-500 leading-relaxed">
+          Your belongings are kept securely off-site in monitored storage facilities.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 p-6">
+        <div class="w-11 h-11 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M8 7V3m8 4V3M5 11h14M5 5h14v16H5z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <h3 class="font-bold text-slate-900 mb-2">Flexible monthly plans</h3>
+        <p class="text-xs text-slate-500 leading-relaxed">
+          Store for as long as you need with flexible monthly storage options.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 p-6">
+        <div class="w-11 h-11 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M3 12h18M12 3l9 9-9 9" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <h3 class="font-bold text-slate-900 mb-2">Returned when needed</h3>
+        <p class="text-xs text-slate-500 leading-relaxed">
+          When you want your belongings back, simply arrange delivery to your door.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- END: ValetStorageBenefits -->
+
+
+<!-- BEGIN: ValetStorageHowItWorks -->
+<section class="py-16 sm:py-20 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-12">
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-teal-50 text-brand-teal text-xs font-bold uppercase tracking-wider mb-3">
+        How it works
+      </span>
+
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
+        More space at home, without the trips to a storage unit.
+      </h2>
+    </div>
+
+    <div class="relative">
+      <div class="hidden lg:block absolute top-7 left-[12%] right-[12%] h-0.5 dotted-track"></div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+
+        <!-- Step 1 -->
+        <div class="text-center">
+          <div class="w-14 h-14 mx-auto rounded-full bg-white border-2 border-teal-200 flex items-center justify-center shadow-sm mb-5 relative">
+            <span class="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-brand-teal text-white text-xs font-bold flex items-center justify-center">1</span>
+            <svg class="w-6 h-6 text-brand-teal" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-slate-900 mb-2">Book your boxes</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Tell us how many boxes you need and we’ll arrange delivery to your door.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="text-center">
+          <div class="w-14 h-14 mx-auto rounded-full bg-white border-2 border-teal-200 flex items-center justify-center shadow-sm mb-5 relative">
+            <span class="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-brand-teal text-white text-xs font-bold flex items-center justify-center">2</span>
+            <svg class="w-6 h-6 text-brand-teal" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M4 7h16v13H4zM8 3h8l2 4H6l2-4z"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-slate-900 mb-2">Pack your things</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Fill your boxes with the items you want to store. Label each box so you know what’s inside.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="text-center">
+          <div class="w-14 h-14 mx-auto rounded-full bg-white border-2 border-teal-200 flex items-center justify-center shadow-sm mb-5 relative">
+            <span class="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-brand-teal text-white text-xs font-bold flex items-center justify-center">3</span>
+            <svg class="w-6 h-6 text-brand-teal" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M3 21h18M5 21V7l7-4 7 4v14"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-slate-900 mb-2">We collect and store</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Book your collection and we’ll take your packed boxes into storage.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="text-center">
+          <div class="w-14 h-14 mx-auto rounded-full bg-white border-2 border-teal-200 flex items-center justify-center shadow-sm mb-5 relative">
+            <span class="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-brand-teal text-white text-xs font-bold flex items-center justify-center">4</span>
+            <svg class="w-6 h-6 text-brand-teal" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M3 12h18M12 3l9 9-9 9"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-slate-900 mb-2">Get them back when you need them</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Ready for your things again? Contact us to arrange delivery back to your door.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- END: ValetStorageHowItWorks -->
+
+
+<!-- BEGIN: ValetStoragePlans -->
+<section class="py-16 sm:py-20 bg-white" id="valet-storage-plans">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-12">
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-teal-50 text-brand-teal text-xs font-bold uppercase tracking-wider mb-3">
+        Storage Plans
+      </span>
+
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
+        Storage that fits around you.
+      </h2>
+
+      <p class="text-sm text-slate-500 max-w-2xl mx-auto">
+        Choose the storage option that suits how much you need to store. We collect from your door, store everything securely and return it when you need it.
+      </p>
+    </div>
+
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+
+      <!-- Plan 1 -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm flex flex-col">
+
+        <p class="text-xs font-bold text-brand-teal uppercase tracking-wider mb-2">
+          A little extra space
+        </p>
+
+        <h3 class="text-2xl font-extrabold text-slate-900 mb-3">
+          Small Storage
+        </h3>
+
+        <p class="text-sm text-slate-500 mb-6">
+          Ideal for boxes, seasonal belongings and smaller items you don't need at home right now.
+        </p>
+
+        <ul class="space-y-3 text-sm text-slate-600 mb-8">
+          <li>✓ Collection from your door</li>
+          <li>✓ Secure off-site storage</li>
+          <li>✓ Flexible monthly storage</li>
+          <li>✓ Return delivery available</li>
+        </ul>
+
+        <a href="#quote-storage" class="mt-auto block w-full text-center bg-slate-100 hover:bg-slate-200 text-slate-900 px-5 py-3 rounded-lg font-bold text-sm transition-all">
+          Choose This Plan
+        </a>
+
+      </div>
+
+
+      <!-- Plan 2 -->
+      <div class="rounded-2xl border-2 border-brand-teal bg-white p-7 shadow-lg relative flex flex-col">
+
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-teal text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider whitespace-nowrap">
+          Most Popular
+        </span>
+
+        <p class="text-xs font-bold text-brand-teal uppercase tracking-wider mb-2">
+          More room at home
+        </p>
+
+        <h3 class="text-2xl font-extrabold text-slate-900 mb-3">
+          Medium Storage
+        </h3>
+
+        <p class="text-sm text-slate-500 mb-6">
+          Great for decluttering, renovations or storing a larger collection of household belongings.
+        </p>
+
+        <ul class="space-y-3 text-sm text-slate-600 mb-8">
+          <li>✓ Collection from your door</li>
+          <li>✓ Secure off-site storage</li>
+          <li>✓ Flexible monthly storage</li>
+          <li>✓ Return delivery available</li>
+        </ul>
+
+        <a href="#quote-storage" class="mt-auto block w-full text-center bg-brand-teal hover:bg-brand-tealHover text-white px-5 py-3 rounded-lg font-bold text-sm transition-all shadow-sm">
+          Choose This Plan
+        </a>
+
+      </div>
+
+
+      <!-- Plan 3 -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm flex flex-col">
+
+        <p class="text-xs font-bold text-brand-teal uppercase tracking-wider mb-2">
+          For bigger storage needs
+        </p>
+
+        <h3 class="text-2xl font-extrabold text-slate-900 mb-3">
+          Large Storage
+        </h3>
+
+        <p class="text-sm text-slate-500 mb-6">
+          Designed for moves, major renovations or when you need significantly more space.
+        </p>
+
+        <ul class="space-y-3 text-sm text-slate-600 mb-8">
+          <li>✓ Collection from your door</li>
+          <li>✓ Secure off-site storage</li>
+          <li>✓ Flexible monthly storage</li>
+          <li>✓ Return delivery available</li>
+        </ul>
+
+        <a href="#quote-storage" class="mt-auto block w-full text-center bg-slate-100 hover:bg-slate-200 text-slate-900 px-5 py-3 rounded-lg font-bold text-sm transition-all">
+          Choose This Plan
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <p class="text-center text-xs text-slate-400 mt-7">
+      Not sure how much storage you need? We'll help you choose the right option.
+    </p>
+
+  </div>
+</section>
+<!-- END: ValetStoragePlans -->
+
+
+<!-- BEGIN: ValetStorageBottomCTA -->
+<section class="py-12 sm:py-14 bg-brand-dark text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-7">
+
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold mb-2">
+          Need more room at home?
+        </h2>
+
+        <p class="text-sm text-slate-300">
+          Choose your storage plan and we'll collect everything from your door.
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3">
+
+        <a href="#valet-storage-plans" class="bg-brand-teal hover:bg-brand-tealHover text-white px-6 py-3 rounded-lg font-bold text-sm text-center transition-all">
+          Choose Your Plan
+        </a>
+
+        <button onclick="showPage('home')" class="border border-slate-600 hover:border-slate-400 px-6 py-3 rounded-lg font-semibold text-sm transition-all">
+          Back to Home
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- END: ValetStorageBottomCTA -->
+
+
+</div>
+<!-- =========================================================
+     END PAGE 3 — VALET STORAGE
+     ========================================================= -->
+
+
+<!-- =========================================================
+     PAGE 4 — HOME REMOVALS
+     ========================================================= -->
+<div id="page-home-removals" class="site-page hidden">
+
+<!-- BEGIN: HomeRemovalsHeader -->
+<header class="bg-brand-dark text-white sticky top-0 z-50 border-b border-slate-800/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+    <a href="#" onclick="showPage('home'); return false;" class="flex items-center gap-3 group">
+      <div class="w-10 h-10 relative flex-shrink-0 flex items-center justify-center">
+        <svg class="w-10 h-10" fill="none" viewBox="0 0 40 40">
+          <path d="M20 3L36 12.2V27.8L20 37L4 27.8V12.2L20 3Z" fill="#111F38"></path>
+          <path d="M20 3L36 12.2L20 21.4L4 12.2L20 3Z" fill="#00D1D1"></path>
+          <path d="M36 12.2V27.8L20 37V21.4L36 12.2Z" fill="#00A8A8"></path>
+          <path d="M4 12.2L20 21.4V37L4 27.8V12.2Z" fill="#EE6425"></path>
+        </svg>
+      </div>
+
+      <div class="leading-none">
+        <span class="block text-xl font-extrabold tracking-wider text-white">VALET</span>
+        <span class="block text-[10px] font-bold tracking-widest text-slate-300 uppercase">Storage &amp; Removals</span>
+      </div>
+    </a>
+
+    <button onclick="showPage('home')" class="text-sm font-semibold text-slate-300 hover:text-white transition-colors">
+      ← Back to Home
+    </button>
+
+  </div>
+</header>
+<!-- END: HomeRemovalsHeader -->
+
+
+<!-- BEGIN: HomeRemovalsHero -->
+<section class="bg-brand-dark text-white py-16 sm:py-20 lg:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+
+      <div>
+        <span class="inline-flex items-center px-3 py-1 rounded-full bg-orange-500/10 text-brand-orange text-xs font-bold uppercase tracking-wider mb-5">
+          Home Removals
+        </span>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+          Moving home,<br>
+          <span class="text-brand-orange">without the stress.</span>
+        </h1>
+
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl mb-8">
+          From apartments to full house moves, our professional team handles your belongings with care from collection through to delivery.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3">
+
+          <a href="#quote-removals" class="bg-brand-orange hover:bg-brand-orangeHover text-white px-6 py-3.5 rounded-lg font-bold text-sm text-center transition-all shadow-md">
+            Get a Removals Quote
+          </a>
+
+          <a href="https://wa.me/" class="border border-slate-600 hover:border-slate-400 text-white px-6 py-3.5 rounded-lg font-semibold text-sm text-center transition-all inline-flex items-center justify-center gap-2">
+            <svg class="w-4 h-4 text-brand-whatsapp" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.199.534 1.286.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"></path>
+            </svg>
+            Quote on WhatsApp
+          </a>
+
+        </div>
+      </div>
+
+
+      <div class="relative">
+        <div class="rounded-3xl overflow-hidden bg-white/5 border border-slate-700 shadow-2xl">
+          <img
+            src="https://southsidegym.ie/wp-content/uploads/2026/09/home-removals.png"
+            alt="Valet home removals"
+            class="w-full h-[340px] sm:h-[420px] object-cover"
+          >
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- END: HomeRemovalsHero -->
+
+
+<!-- BEGIN: HomeRemovalsIncluded -->
+<section class="py-14 sm:py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-10">
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-orange-50 text-brand-orange text-xs font-bold uppercase tracking-wider mb-3">
+        Home Removals
+      </span>
+
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
+        Everything you need for a smoother move.
+      </h2>
+
+      <p class="text-sm text-slate-500 max-w-2xl mx-auto">
+        Professional moving support from your current home to your new one, with optional help for packing and furniture.
+      </p>
+    </div>
+
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+      <!-- Included 1 -->
+      <div class="rounded-2xl border border-slate-200 p-6">
+        <div class="w-11 h-11 rounded-xl bg-orange-50 text-brand-orange flex items-center justify-center mb-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M8 17a2 2 0 100-4 2 2 0 000 4zm10 0a2 2 0 100-4 2 2 0 000 4zM3 9h10v6H3V9zm10 2h4l3 3v2h-7v-5z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+
+        <h3 class="font-bold text-slate-900 mb-2">
+          Professional removals
+        </h3>
+
+        <p class="text-xs text-slate-500 leading-relaxed">
+          Home, apartment and same-city moves handled by our professional removals team.
+        </p>
+      </div>
+
+
+      <!-- Included 2 -->
+      <div class="rounded-2xl border border-slate-200 p-6">
+        <div class="w-11 h-11 rounded-xl bg-orange-50 text-brand-orange flex items-center justify-center mb-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+
+        <h3 class="font-bold text-slate-900 mb-2">
+          Packing help
+        </h3>
+
+        <p class="text-xs text-slate-500 leading-relaxed">
+          Packing assistance and quality packing materials are available when you need them.
+        </p>
+      </div>
+
+
+      <!-- Included 3 -->
+      <div class="rounded-2xl border border-slate-200 p-6">
+        <div class="w-11 h-11 rounded-xl bg-orange-50 text-brand-orange flex items-center justify-center mb-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M4 20h16M6 16h12M8 12h8M10 8h4M12 4v4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+
+        <h3 class="font-bold text-slate-900 mb-2">
+          Furniture assistance
+        </h3>
+
+        <p class="text-xs text-slate-500 leading-relaxed">
+          Tell us if furniture needs disassembly so it can be included as part of your moving requirements.
+        </p>
+      </div>
+
+
+      <!-- Included 4 -->
+      <div class="rounded-2xl border border-slate-200 p-6">
+        <div class="w-11 h-11 rounded-xl bg-orange-50 text-brand-orange flex items-center justify-center mb-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+
+        <h3 class="font-bold text-slate-900 mb-2">
+          Trained &amp; insured
+        </h3>
+
+        <p class="text-xs text-slate-500 leading-relaxed">
+          Your belongings are handled by a professional, trained and insured removals team.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- END: HomeRemovalsIncluded -->
+
+
+<!-- BEGIN: HomeRemovalsHowItWorks -->
+<section class="py-16 sm:py-20 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-12">
+
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-orange-50 text-brand-orange text-xs font-bold uppercase tracking-wider mb-3">
+        How it works
+      </span>
+
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
+        A smooth move starts with a simple plan.
+      </h2>
+
+      <p class="text-sm text-slate-500 max-w-xl mx-auto">
+        Tell us what you need and we'll take it from there.
+      </p>
+
+    </div>
+
+
+    <div class="relative">
+
+      <div class="hidden lg:block absolute top-7 left-[12%] right-[12%] h-0.5 dotted-track"></div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+
+        <!-- Step 1 -->
+        <div class="text-center">
+
+          <div class="w-14 h-14 mx-auto rounded-full bg-white border-2 border-orange-200 flex items-center justify-center shadow-sm mb-5 relative">
+            <span class="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-brand-orange text-white text-xs font-bold flex items-center justify-center">
+              1
+            </span>
+
+            <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+
+          <h3 class="font-bold text-slate-900 mb-2">
+            Tell us about your move
+          </h3>
+
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Use our online quote form or message us on WhatsApp. Share where you’re moving from and to, your preferred date and what needs moving.
+          </p>
+
+        </div>
+
+
+        <!-- Step 2 -->
+        <div class="text-center">
+
+          <div class="w-14 h-14 mx-auto rounded-full bg-white border-2 border-orange-200 flex items-center justify-center shadow-sm mb-5 relative">
+            <span class="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-brand-orange text-white text-xs font-bold flex items-center justify-center">
+              2
+            </span>
+
+            <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m5-2a9 9 0 11-16 0" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+
+          <h3 class="font-bold text-slate-900 mb-2">
+            Get your quote
+          </h3>
+
+          <p class="text-xs text-slate-500 leading-relaxed">
+            We’ll review the details, ask any follow-up questions and send you a quote.
+          </p>
+
+        </div>
+
+
+        <!-- Step 3 -->
+        <div class="text-center">
+
+          <div class="w-14 h-14 mx-auto rounded-full bg-white border-2 border-orange-200 flex items-center justify-center shadow-sm mb-5 relative">
+            <span class="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-brand-orange text-white text-xs font-bold flex items-center justify-center">
+              3
+            </span>
+
+            <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="16" rx="2"></rect>
+              <path d="M16 3v4M8 3v4M3 11h18" stroke-linecap="round"></path>
+            </svg>
+          </div>
+
+          <h3 class="font-bold text-slate-900 mb-2">
+            Book your moving day
+          </h3>
+
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Once you’re happy with the quote, confirm your booking. We’ll agree the arrival time and talk you through getting ready.
+          </p>
+
+        </div>
+
+
+        <!-- Step 4 -->
+        <div class="text-center">
+
+          <div class="w-14 h-14 mx-auto rounded-full bg-white border-2 border-orange-200 flex items-center justify-center shadow-sm mb-5 relative">
+            <span class="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-brand-orange text-white text-xs font-bold flex items-center justify-center">
+              4
+            </span>
+
+            <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M8 17a2 2 0 100-4 2 2 0 000 4zm10 0a2 2 0 100-4 2 2 0 000 4zM3 9h10v6H3V9zm10 2h4l3 3v2h-7v-5z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+
+          <h3 class="font-bold text-slate-900 mb-2">
+            We handle the move
+          </h3>
+
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Our team loads, transports and unloads your belongings with care, placing them in the rooms you choose.
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- END: HomeRemovalsHowItWorks -->
+
+
+<!-- BEGIN: HomeRemovalsQuoteOptions -->
+<section class="py-16 sm:py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-12">
+
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-orange-50 text-brand-orange text-xs font-bold uppercase tracking-wider mb-3">
+        Get Your Quote
+      </span>
+
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
+        Two easy ways to tell us about your move.
+      </h2>
+
+      <p class="text-sm text-slate-500 max-w-2xl mx-auto">
+        Complete our online form or send us the details on WhatsApp. We'll review your move and come back to you with your personalised quote.
+      </p>
+
+    </div>
+
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+
+      <!-- Online Quote -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-7 sm:p-8 shadow-sm">
+
+        <div class="w-12 h-12 rounded-xl bg-orange-50 text-brand-orange flex items-center justify-center mb-5">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+
+        <h3 class="text-xl font-extrabold text-slate-900 mb-2">
+          Online Quote
+        </h3>
+
+        <p class="text-sm text-slate-500 leading-relaxed mb-6">
+          Tell us where you're moving, when you're moving and what needs to go. Submit your request and our team will review the details.
+        </p>
+
+        <ul class="space-y-3 text-sm text-slate-600 mb-8">
+          <li class="flex items-center gap-2">
+            <span class="text-brand-orange font-bold">✓</span>
+            Add your move details
+          </li>
+
+          <li class="flex items-center gap-2">
+            <span class="text-brand-orange font-bold">✓</span>
+            Tell us what needs moving
+          </li>
+
+          <li class="flex items-center gap-2">
+            <span class="text-brand-orange font-bold">✓</span>
+            Add packing and furniture requirements
+          </li>
+
+          <li class="flex items-center gap-2">
+            <span class="text-brand-orange font-bold">✓</span>
+            Submit directly to our team
+          </li>
+        </ul>
+
+        <a href="#quote-removals" class="block w-full text-center bg-brand-orange hover:bg-brand-orangeHover text-white px-6 py-3 rounded-lg font-bold text-sm transition-all shadow-sm">
+          Get a Removals Quote
+        </a>
+
+      </div>
+
+
+      <!-- WhatsApp Quote -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-7 sm:p-8 shadow-sm">
+
+        <div class="w-12 h-12 rounded-xl bg-green-50 text-brand-whatsapp flex items-center justify-center mb-5">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.199.534 1.286.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"></path>
+          </svg>
+        </div>
+
+        <h3 class="text-xl font-extrabold text-slate-900 mb-2">
+          WhatsApp Quote
+        </h3>
+
+        <p class="text-sm text-slate-500 leading-relaxed mb-6">
+          Prefer WhatsApp? Send us photos or videos of what needs moving and our team can review your requirements.
+        </p>
+
+        <ul class="space-y-3 text-sm text-slate-600 mb-8">
+          <li class="flex items-center gap-2">
+            <span class="text-brand-whatsapp font-bold">✓</span>
+            Send photos or videos
+          </li>
+
+          <li class="flex items-center gap-2">
+            <span class="text-brand-whatsapp font-bold">✓</span>
+            Explain your move in a message
+          </li>
+
+          <li class="flex items-center gap-2">
+            <span class="text-brand-whatsapp font-bold">✓</span>
+            Ask questions directly
+          </li>
+
+          <li class="flex items-center gap-2">
+            <span class="text-brand-whatsapp font-bold">✓</span>
+            Receive your personalised quote
+          </li>
+        </ul>
+
+        <a href="https://wa.me/" class="block w-full text-center bg-brand-whatsapp hover:bg-brand-whatsappHover text-white px-6 py-3 rounded-lg font-bold text-sm transition-all shadow-sm">
+          Quote on WhatsApp
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- END: HomeRemovalsQuoteOptions -->
+
+
+<!-- BEGIN: HomeRemovalsBottomCTA -->
+<section class="py-12 sm:py-14 bg-brand-dark text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-7">
+
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold mb-2">
+          Planning your move?
+        </h2>
+
+        <p class="text-sm text-slate-300">
+          Tell us what you're moving and we'll put together your personalised removals quote.
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3">
+
+        <a href="#quote-removals" class="bg-brand-orange hover:bg-brand-orangeHover text-white px-6 py-3 rounded-lg font-bold text-sm text-center transition-all">
+          Get a Removals Quote
+        </a>
+
+        <button onclick="showPage('home')" class="border border-slate-600 hover:border-slate-400 px-6 py-3 rounded-lg font-semibold text-sm transition-all">
+          Back to Home
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- END: HomeRemovalsBottomCTA -->
+
+
+</div>
+<!-- =========================================================
+     END PAGE 4 — HOME REMOVALS
+     ========================================================= -->
+
+
+<!-- =========================================================
+     PAGE 5 — OFFICE / SMALL MOVES
+     ========================================================= -->
+<div id="page-office-moves" class="site-page hidden">
+
+
+<!-- BEGIN: OfficeMovesHeader -->
+<header class="bg-brand-dark text-white sticky top-0 z-50 border-b border-slate-800/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+    <a href="#" onclick="showPage('home'); return false;" class="flex items-center gap-3 group">
+
+      <div class="w-10 h-10 relative flex-shrink-0 flex items-center justify-center">
+        <svg class="w-10 h-10" fill="none" viewBox="0 0 40 40">
+          <path d="M20 3L36 12.2V27.8L20 37L4 27.8V12.2L20 3Z" fill="#111F38"></path>
+          <path d="M20 3L36 12.2L20 21.4L4 12.2L20 3Z" fill="#00D1D1"></path>
+          <path d="M36 12.2V27.8L20 37V21.4L36 12.2Z" fill="#00A8A8"></path>
+          <path d="M4 12.2L20 21.4V37L4 27.8V12.2Z" fill="#EE6425"></path>
+        </svg>
+      </div>
+
+      <div class="leading-none">
+        <span class="block text-xl font-extrabold tracking-wider text-white">VALET</span>
+        <span class="block text-[10px] font-bold tracking-widest text-slate-300 uppercase">
+          Storage &amp; Removals
+        </span>
+      </div>
+
+    </a>
+
+    <button
+      onclick="showPage('home')"
+      class="text-sm font-semibold text-slate-300 hover:text-white transition-colors"
+    >
+      ← Back to Home
+    </button>
+
+  </div>
+</header>
+<!-- END: OfficeMovesHeader -->
+
+
+<!-- BEGIN: OfficeMovesHero -->
+<section class="bg-brand-dark text-white py-16 sm:py-20 lg:py-24">
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+
+      <!-- Hero Content -->
+      <div>
+
+        <span class="inline-flex items-center px-3 py-1 rounded-full bg-orange-500/10 text-brand-orange text-xs font-bold uppercase tracking-wider mb-5">
+          Office / Small Moves
+        </span>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+          Small move.<br>
+          <span class="text-brand-orange">Big attention to detail.</span>
+        </h1>
+
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl mb-8">
+          Moving an office, studio or smaller load? Our professional removals team makes it simple, with careful collection, transport and delivery.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3">
+
+          <a
+            href="#quote-removals"
+            class="bg-brand-orange hover:bg-brand-orangeHover text-white px-6 py-3.5 rounded-lg font-bold text-sm text-center transition-all shadow-md"
+          >
+            Get a Moving Quote
+          </a>
+
+          <a
+            href="https://wa.me/"
+            class="border border-slate-600 hover:border-slate-400 text-white px-6 py-3.5 rounded-lg font-semibold text-sm text-center transition-all inline-flex items-center justify-center gap-2"
+          >
+
+            <svg class="w-4 h-4 text-brand-whatsapp" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.199.534 1.286.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"></path>
+            </svg>
+
+            Quote on WhatsApp
+
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- Hero Image -->
+      <div class="relative">
+
+        <div class="rounded-3xl overflow-hidden bg-white/5 border border-slate-700 shadow-2xl">
+
+          <img
+            src="https://southsidegym.ie/wp-content/uploads/2026/09/office-moves.png"
+            alt="Office and small moves"
+            class="w-full h-[340px] sm:h-[420px] object-cover"
+          >
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- END: OfficeMovesHero -->
+
+
+<!-- BEGIN: OfficeMovesBenefits -->
+<section class="py-14 sm:py-16 bg-white">
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-10">
+
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-orange-50 text-brand-orange text-xs font-bold uppercase tracking-wider mb-3">
+        Small Moves
+      </span>
+
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
+        A flexible service for smaller moves.
+      </h2>
+
+      <p class="text-sm text-slate-500 max-w-2xl mx-auto">
+        Ideal when you don't need a full-scale house removal but still want a professional team handling the move.
+      </p>
+
+    </div>
+
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+      <!-- Benefit 1 -->
+      <div class="rounded-2xl border border-slate-200 p-6">
+
+        <div class="w-11 h-11 rounded-xl bg-orange-50 text-brand-orange flex items-center justify-center mb-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M3 21h18M5 21V7h14v14M9 11h2m2 0h2M9 15h2m2 0h2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+
+        <h3 class="font-bold text-slate-900 mb-2">
+          Office moves
+        </h3>
+
+        <p class="text-xs text-slate-500 leading-relaxed">
+          A straightforward moving service for offices, workspaces and small businesses.
+        </p>
+
+      </div>
+
+
+      <!-- Benefit 2 -->
+      <div class="rounded-2xl border border-slate-200 p-6">
+
+        <div class="w-11 h-11 rounded-xl bg-orange-50 text-brand-orange flex items-center justify-center mb-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M4 20h16V8H4v12zm4-12V4h8v4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+
+        <h3 class="font-bold text-slate-900 mb-2">
+          Studios &amp; workspaces
+        </h3>
+
+        <p class="text-xs text-slate-500 leading-relaxed">
+          Moving equipment, furniture or belongings between studios and workspaces.
+        </p>
+
+      </div>
+
+
+      <!-- Benefit 3 -->
+      <div class="rounded-2xl border border-slate-200 p-6">
+
+        <div class="w-11 h-11 rounded-xl bg-orange-50 text-brand-orange flex items-center justify-center mb-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+
+        <h3 class="font-bold text-slate-900 mb-2">
+          Smaller loads
+        </h3>
+
+        <p class="text-xs text-slate-500 leading-relaxed">
+          A practical option when you only have a smaller number of items that need moving.
+        </p>
+
+      </div>
+
+
+      <!-- Benefit 4 -->
+      <div class="rounded-2xl border border-slate-200 p-6">
+
+        <div class="w-11 h-11 rounded-xl bg-orange-50 text-brand-orange flex items-center justify-center mb-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+
+        <h3 class="font-bold text-slate-900 mb-2">
+          Professional team
+        </h3>
+
+        <p class="text-xs text-slate-500 leading-relaxed">
+          Your items are handled carefully by our professional, trained and insured removals team.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- END: OfficeMovesBenefits -->
+
+
+<!-- BEGIN: OfficeMovesHowItWorks -->
+<section class="py-16 sm:py-20 bg-slate-50">
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-12">
+
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-orange-50 text-brand-orange text-xs font-bold uppercase tracking-wider mb-3">
+        How it works
+      </span>
+
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
+        A simple way to organise your move.
+      </h2>
+
+      <p class="text-sm text-slate-500 max-w-xl mx-auto">
+        Tell us what needs moving and we'll put together the right quote for the job.
+      </p>
+
+    </div>
+
+
+    <div class="relative">
+
+      <div class="hidden lg:block absolute top-7 left-[12%] right-[12%] h-0.5 dotted-track"></div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+
+        <!-- Step 1 -->
+        <div class="text-center">
+
+          <div class="w-14 h-14 mx-auto rounded-full bg-white border-2 border-orange-200 flex items-center justify-center shadow-sm mb-5 relative">
+
+            <span class="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-brand-orange text-white text-xs font-bold flex items-center justify-center">
+              1
+            </span>
+
+            <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+
+          </div>
+
+          <h3 class="font-bold text-slate-900 mb-2">
+            Tell us about the move
+          </h3>
+
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Share the collection and delivery locations, your preferred date and what needs moving.
+          </p>
+
+        </div>
+
+
+        <!-- Step 2 -->
+        <div class="text-center">
+
+          <div class="w-14 h-14 mx-auto rounded-full bg-white border-2 border-orange-200 flex items-center justify-center shadow-sm mb-5 relative">
+
+            <span class="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-brand-orange text-white text-xs font-bold flex items-center justify-center">
+              2
+            </span>
+
+            <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m5-2a9 9 0 11-16 0" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+
+          </div>
+
+          <h3 class="font-bold text-slate-900 mb-2">
+            Get your quote
+          </h3>
+
+          <p class="text-xs text-slate-500 leading-relaxed">
+            We'll review the details, ask any follow-up questions and send you a personalised quote.
+          </p>
+
+        </div>
+
+
+        <!-- Step 3 -->
+        <div class="text-center">
+
+          <div class="w-14 h-14 mx-auto rounded-full bg-white border-2 border-orange-200 flex items-center justify-center shadow-sm mb-5 relative">
+
+            <span class="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-brand-orange text-white text-xs font-bold flex items-center justify-center">
+              3
+            </span>
+
+            <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="16" rx="2"></rect>
+              <path d="M16 3v4M8 3v4M3 11h18" stroke-linecap="round"></path>
+            </svg>
+
+          </div>
+
+          <h3 class="font-bold text-slate-900 mb-2">
+            Book your move
+          </h3>
+
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Once you're happy with the quote, confirm the date and we'll arrange the details with you.
+          </p>
+
+        </div>
+
+
+        <!-- Step 4 -->
+        <div class="text-center">
+
+          <div class="w-14 h-14 mx-auto rounded-full bg-white border-2 border-orange-200 flex items-center justify-center shadow-sm mb-5 relative">
+
+            <span class="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-brand-orange text-white text-xs font-bold flex items-center justify-center">
+              4
+            </span>
+
+            <svg class="w-6 h-6 text-brand-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M8 17a2 2 0 100-4 2 2 0 000 4zm10 0a2 2 0 100-4 2 2 0 000 4zM3 9h10v6H3V9zm10 2h4l3 3v2h-7v-5z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+
+          </div>
+
+          <h3 class="font-bold text-slate-900 mb-2">
+            We handle the move
+          </h3>
+
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Our team collects, transports and delivers your items carefully to their new location.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- END: OfficeMovesHowItWorks -->
+
+
+<!-- BEGIN: OfficeMovesQuoteOptions -->
+<section class="py-16 sm:py-20 bg-white">
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-12">
+
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-orange-50 text-brand-orange text-xs font-bold uppercase tracking-wider mb-3">
+        Get Your Quote
+      </span>
+
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
+        Tell us what needs moving.
+      </h2>
+
+      <p class="text-sm text-slate-500 max-w-2xl mx-auto">
+        Use the online form or send photos and details on WhatsApp. We'll review the job and come back to you with your quote.
+      </p>
+
+    </div>
+
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+
+      <!-- Online Quote -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-7 sm:p-8 shadow-sm flex flex-col">
+
+        <div class="w-12 h-12 rounded-xl bg-orange-50 text-brand-orange flex items-center justify-center mb-5">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+
+        <h3 class="text-xl font-extrabold text-slate-900 mb-2">
+          Online Quote
+        </h3>
+
+        <p class="text-sm text-slate-500 leading-relaxed mb-6">
+          Add the details of your move, what needs transporting and any access or packing requirements.
+        </p>
+
+        <ul class="space-y-3 text-sm text-slate-600 mb-8">
+
+          <li class="flex items-center gap-2">
+            <span class="text-brand-orange font-bold">✓</span>
+            Add collection and delivery details
+          </li>
+
+          <li class="flex items-center gap-2">
+            <span class="text-brand-orange font-bold">✓</span>
+            Tell us what needs moving
+          </li>
+
+          <li class="flex items-center gap-2">
+            <span class="text-brand-orange font-bold">✓</span>
+            Add access and packing requirements
+          </li>
+
+          <li class="flex items-center gap-2">
+            <span class="text-brand-orange font-bold">✓</span>
+            Submit directly to our team
+          </li>
+
+        </ul>
+
+        <a
+          href="#quote-removals"
+          class="mt-auto block w-full text-center bg-brand-orange hover:bg-brand-orangeHover text-white px-6 py-3 rounded-lg font-bold text-sm transition-all shadow-sm"
+        >
+          Get a Moving Quote
+        </a>
+
+      </div>
+
+
+      <!-- WhatsApp Quote -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-7 sm:p-8 shadow-sm flex flex-col">
+
+        <div class="w-12 h-12 rounded-xl bg-green-50 text-brand-whatsapp flex items-center justify-center mb-5">
+
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.199.534 1.286.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"></path>
+          </svg>
+
+        </div>
+
+        <h3 class="text-xl font-extrabold text-slate-900 mb-2">
+          WhatsApp Quote
+        </h3>
+
+        <p class="text-sm text-slate-500 leading-relaxed mb-6">
+          Send photos or videos of the items and tell us where they're being collected from and delivered to.
+        </p>
+
+        <ul class="space-y-3 text-sm text-slate-600 mb-8">
+
+          <li class="flex items-center gap-2">
+            <span class="text-brand-whatsapp font-bold">✓</span>
+            Send photos or videos
+          </li>
+
+          <li class="flex items-center gap-2">
+            <span class="text-brand-whatsapp font-bold">✓</span>
+            Explain the move in a message
+          </li>
+
+          <li class="flex items-center gap-2">
+            <span class="text-brand-whatsapp font-bold">✓</span>
+            Ask questions directly
+          </li>
+
+          <li class="flex items-center gap-2">
+            <span class="text-brand-whatsapp font-bold">✓</span>
+            Receive your personalised quote
+          </li>
+
+        </ul>
+
+        <a
+          href="https://wa.me/"
+          class="mt-auto block w-full text-center bg-brand-whatsapp hover:bg-brand-whatsappHover text-white px-6 py-3 rounded-lg font-bold text-sm transition-all shadow-sm"
+        >
+          Quote on WhatsApp
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- END: OfficeMovesQuoteOptions -->
+
+
+<!-- BEGIN: OfficeMovesBottomCTA -->
+<section class="py-12 sm:py-14 bg-brand-dark text-white">
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-7">
+
+      <div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold mb-2">
+          Got a smaller move coming up?
+        </h2>
+
+        <p class="text-sm text-slate-300">
+          Send us the details and we'll put together a personalised quote for your move.
+        </p>
+
+      </div>
+
+
+      <div class="flex flex-col sm:flex-row gap-3">
+
+        <a
+          href="#quote-removals"
+          class="bg-brand-orange hover:bg-brand-orangeHover text-white px-6 py-3 rounded-lg font-bold text-sm text-center transition-all"
+        >
+          Get a Moving Quote
+        </a>
+
+        <button
+          onclick="showPage('home')"
+          class="border border-slate-600 hover:border-slate-400 px-6 py-3 rounded-lg font-semibold text-sm transition-all"
+        >
+          Back to Home
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- END: OfficeMovesBottomCTA -->
+
+
+</div>
+<!-- =========================================================
+     END PAGE 5 — OFFICE / SMALL MOVES
+     ========================================================= -->
 
 <!-- BEGIN: REBUILT STORAGE + REMOVALS BOOKING SYSTEM -->
 <div id="quoteCalculatorModal"
@@ -1336,6 +3110,45 @@ Choose Your Plan
 </style>
 
 <script>
+
+function showPage(page, updateHistory = true) {
+  document.querySelectorAll('.site-page').forEach(function(el) {
+    el.classList.add('hidden');
+  });
+
+  const targetPage = document.getElementById('page-' + page);
+
+  if (!targetPage) {
+    page = 'home';
+  }
+
+  const finalPage = document.getElementById('page-' + page);
+
+  if (finalPage) {
+    finalPage.classList.remove('hidden');
+    window.scrollTo(0, 0);
+  }
+
+  if (updateHistory) {
+    const newHash = page === 'home' ? '#home' : '#' + page;
+    history.pushState({ page: page }, '', newHash);
+  }
+}
+
+window.addEventListener('popstate', function() {
+  const page = window.location.hash.replace('#', '') || 'home';
+
+  const validPages = [
+    'home',
+    'valet-boxes',
+    'valet-storage',
+    'home-removals',
+    'office-moves'
+  ];
+
+  showPage(validPages.includes(page) ? page : 'home', false);
+});
+
 const VALET_WHATSAPP_NUMBER = '';
 // Add the Make.com webhook URL here when ready.
 // The webhook should receive the JSON request and send the email to Jamie.
